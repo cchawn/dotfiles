@@ -50,5 +50,3 @@ alias wdwwwp='wolfman deploy -a www -e prod'
 alias ide='/Applications/RubyMine.app/Contents/MacOS/rubymine'
 alias be='bundle exec'
 alias wolf='wolfman'
-
-eval "$(hub alias -s)"
