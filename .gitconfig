@@ -1,0 +1,27 @@
+user]
+        name = Christina Chan
+        email = 6462356+cchawn@users.noreply.github.com
+[core]
+        excludesfile = /Users/christinachan/.gitignore_global
+[alias]
+        co = checkout
+        br = branch
+        ci = commit
+        st = status
+        undo = reset HEAD~
+        unstage = reset HEAD --
+        last = log -1 HEAD
+        cameo = commit -a --amend --no-edit
+        cam = commit -am
+[init]
+        templatedir = ~/.git-templates
+[remote "origin"]
+        prune = true
+[diff "ansible-vault"]
+        textconv = ansible-vault view
+        cachetextconv = false
+[filter "lfs"]
+        required = true
+        clean = git-lfs clean -- %f
+        smudge = git-lfs smudge -- %f
+        process = git-lfs filter-process
