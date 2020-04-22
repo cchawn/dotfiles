@@ -1,0 +1,54 @@
+alias wolfman="~/workspace/wolfman/bin/wolfman"
+alias trebuchet="~/workspace/trebuchet-cli/bin/trebuchet"
+
+alias wcws='wolfman rcon -a wealthsimple -e staging'
+alias wcwp='wolfman rcon -a wealthsimple -e production'
+alias wdws='wolfman deploy -a wealthsimple -e staging'
+alias wdwp='wolfman deploy -a wealthsimple -e production'
+alias wjwp='wolfman jobs -a wealthsimple -e production'
+alias wjws='wolfman jobs -a wealthsimple -e staging'
+alias wbw='wolfman builds -a wealthsimple'
+
+alias wcas='wolfman rcon -a ares -e staging --worker'
+alias wcap='wolfman rcon -a ares -e production --worker'
+alias wdas='wolfman deploy -a ares -e staging'
+alias wdap='wolfman deploy -a ares -e production'
+alias wba='wolfman builds -a ares'
+
+alias wcfs='wolfman rcon -a fort-knox -e staging --worker'
+alias wcfp='wolfman rcon -a fort-knox -e production --worker'
+alias wdfs='wolfman deploy -a fort-knox -e staging'
+alias wdfp='wolfman deploy -a fort-knox -e production'
+alias wbf='wolfman builds -a fort-knox'
+
+alias wcps='wolfman rcon -a poseidon -e staging --worker'
+alias wcpp='wolfman rcon -a poseidon -e production --worker'
+alias wdps='wolfman deploy -a poseidon -e staging'
+alias wdpp='wolfman deploy -a poseidon -e production'
+alias wbp='wolfman builds -a poseidon'
+
+alias wdts='wolfman deploy -a terminal -e staging'
+alias wdtp='wolfman deploy -a terminal -e production'
+alias wjts='wolfman jobs -a terminal -e staging'
+alias wjtp='wolfman jobs -a terminal -e staging'
+
+alias wcus='wolfman rcon -a ups -e staging'
+alias wcup='wolfman rcon -a ups -e prod'
+alias wdus='wolfman deploy -a ups -e staging'
+
+alias wctfs='wolfman rcon -a tooth-fairy -e staging'
+alias wctfp='wolfman rcon -a tooth-fairy -e production'
+alias wdtfs='wolfman deploy -a tooth-fairy -e staging'
+alias wdtfp='wolfman deploy -a tooth-fairy -e production'
+alias wjtfs='wolfman jobs -a tooth-fairy -e staging'
+alias wjtfp='wolfman jobs -a tooth-fairy -e staging'
+alias wbtf='wolfman builds -a tooth-fairy'
+
+alias wdwwws='wolfman deploy -a www -e staging'
+alias wdwwwp='wolfman deploy -a www -e prod'
+
+alias ide='/Applications/RubyMine.app/Contents/MacOS/rubymine'
+alias be='bundle exec'
+alias wolf='wolfman'
+
+eval "$(hub alias -s)"
