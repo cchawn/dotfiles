@@ -2,7 +2,7 @@
         name = Christina Chan
         email = 6462356+cchawn@users.noreply.github.com
 [core]
-        excludesfile = /Users/christinachan/.gitignore_global
+	excludesfile = /Users/cchan/.gitignore_global
 [alias]
         co = checkout
         br = branch
@@ -15,6 +15,7 @@
         cam = commit -am
 [init]
         templatedir = ~/.git-templates
+	defaultBranch = main
 [remote "origin"]
         prune = true
 [diff "ansible-vault"]

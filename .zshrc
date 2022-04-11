@@ -28,6 +28,10 @@ export CPPFLAGS=-I/usr/local/opt/imagemagick@6/include
 export PKG_CONFIG_PATH=/usr/local/opt/imagemagick@6/lib/pkgconfig
 export LDFLAGS=-L/usr/local/opt/imagemagick@6/lib
 export GITHUB_PACKAGES_TOKEN="REPLACE_ME"
+export GITHUB_API_TOKEN="REPLACE_ME"
 
 # https://github.com/junegunn/fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# https://direnv.net/
+eval "$(direnv hook zsh)"
