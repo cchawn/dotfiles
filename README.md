@@ -1,3 +1,3 @@
-# config
+# .dotfiles
 
 Custom shell/terminal configurations.
