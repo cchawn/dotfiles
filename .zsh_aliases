@@ -1,7 +1,2 @@
 # generic
 alias be = 'bundle exec'
-
-# wealthsimple tools
-alias germinate = '~/workspace/germinate/bin/germinate'
-alias wolfman = "~/workspace/wolfman/bin/wolfman"
-alias wolf = 'wolfman'
