@@ -1,8 +1,0 @@
-#!/bin/sh
-
-# run rubocop if applicable
-if [ -f ".rubocop.yml" ]
-then
-  bundle exec rubocop
-fi
-
