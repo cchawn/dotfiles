@@ -30,52 +30,21 @@ if [ ! -n "${WILDCHERRY_TIME_SHOW+1}" ]; then
   WILDCHERRY_TIME_SHOW=true
 fi
 if [ ! -n "${WILDCHERRY_TIME_BG+1}" ]; then
-  WILDCHERRY_TIME_BG=magenta
+  WILDCHERRY_TIME_BG=black
 fi
 if [ ! -n "${WILDCHERRY_TIME_FG+1}" ]; then
-  WILDCHERRY_TIME_FG=cyan
+  WILDCHERRY_TIME_FG=white
 fi
 
-# VIRTUALENV
-if [ ! -n "${WILDCHERRY_VIRTUALENV_SHOW+1}" ]; then
-  WILDCHERRY_VIRTUALENV_SHOW=true
+# MISE
+if [ ! -n "${WILDCHERRY_MISE_SHOW+1}" ]; then
+  WILDCHERRY_MISE_SHOW=true
 fi
-if [ ! -n "${WILDCHERRY_VIRTUALENV_BG+1}" ]; then
-  WILDCHERRY_VIRTUALENV_BG=yellow
+if [ ! -n "${WILDCHERRY_MISE_BG+1}" ]; then
+  WILDCHERRY_MISE_BG=magenta
 fi
-if [ ! -n "${WILDCHERRY_VIRTUALENV_FG+1}" ]; then
-  WILDCHERRY_VIRTUALENV_FG=white
-fi
-if [ ! -n "${WILDCHERRY_VIRTUALENV_PREFIX+1}" ]; then
-  WILDCHERRY_VIRTUALENV_PREFIX=🐍
-fi
-
-# NVM
-if [ ! -n "${WILDCHERRY_NVM_SHOW+1}" ]; then
-  WILDCHERRY_NVM_SHOW=false
-fi
-if [ ! -n "${WILDCHERRY_NVM_BG+1}" ]; then
-  WILDCHERRY_NVM_BG=green
-fi
-if [ ! -n "${WILDCHERRY_NVM_FG+1}" ]; then
-  WILDCHERRY_NVM_FG=white
-fi
-if [ ! -n "${WILDCHERRY_NVM_PREFIX+1}" ]; then
-  WILDCHERRY_NVM_PREFIX="⬡ "
-fi
-
-# RVM
-if [ ! -n "${WILDCHERRY_RVM_SHOW+1}" ]; then
-  WILDCHERRY_RVM_SHOW=true
-fi
-if [ ! -n "${WILDCHERRY_RVM_BG+1}" ]; then
-  WILDCHERRY_RVM_BG=magenta
-fi
-if [ ! -n "${WILDCHERRY_RVM_FG+1}" ]; then
-  WILDCHERRY_RVM_FG=white
-fi
-if [ ! -n "${WILDCHERRY_RVM_PREFIX+1}" ]; then
-  WILDCHERRY_RVM_PREFIX=♦️
+if [ ! -n "${WILDCHERRY_MISE_FG+1}" ]; then
+  WILDCHERRY_MISE_FG=white
 fi
 
 # DIR
@@ -255,41 +224,6 @@ prompt_git() {
   fi
 }
 
-prompt_hg() {
-  local rev status
-  if $(hg id >/dev/null 2>&1); then
-    if $(hg prompt >/dev/null 2>&1); then
-      if [[ $(hg prompt "{status|unknown}") = "?" ]]; then
-        # if files are not added
-        prompt_segment red white
-        st='±'
-      elif [[ -n $(hg prompt "{status|modified}") ]]; then
-        # if any modification
-        prompt_segment yellow black
-        st='±'
-      else
-        # if working copy is clean
-        prompt_segment green black
-      fi
-      echo -n $(hg prompt "☿ {rev}@{branch}") $st
-    else
-      st=""
-      rev=$(hg id -n 2>/dev/null | sed 's/[^-0-9]//g')
-      branch=$(hg id -b 2>/dev/null)
-      if $(hg st | grep -Eq "^\?"); then
-        prompt_segment red black
-        st='±'
-      elif $(hg st | grep -Eq "^(M|A)"); then
-        prompt_segment yellow black
-        st='±'
-      else
-        prompt_segment green black
-      fi
-      echo -n "☿ $rev@$branch" $st
-    fi
-  fi
-}
-
 # Dir: current working directory
 prompt_dir() {
   if [[ $WILDCHERRY_DIR_SHOW == false ]] then
@@ -303,45 +237,39 @@ prompt_dir() {
   prompt_segment $WILDCHERRY_DIR_BG $WILDCHERRY_DIR_FG $dir
 }
 
-# RVM: only shows RVM info if on a gemset that is not the default one
-prompt_rvm() {
-  if [[ $WILDCHERRY_RVM_SHOW == false ]] then
+prompt_mise() {
+  local versions=""
+  local separator=" "
+
+  if ! command -v mise &> /dev/null; then
     return
   fi
 
-  if which rvm-prompt &> /dev/null; then
-    if [[ ! -n $(rvm gemset list | grep "=> (default)") ]]
-    then
-      prompt_segment $WILDCHERRY_RVM_BG $WILDCHERRY_RVM_FG $WILDCHERRY_RVM_PREFIX"  $(rvm-prompt i v g)"
-    fi
-  fi
-}
+  # Get mise output
+  local mise_output=$(mise current 2>/dev/null)
 
-# Virtualenv: current working virtualenv
-prompt_virtualenv() {
-  if [[ $WILDCHERRY_VIRTUALENV_SHOW == false ]] then
-    return
+  # Node
+  local node_version=$(echo "$mise_output" | awk '$1 == "node" {print $2}')
+  if [[ -n "$node_version" ]]; then
+      [[ -n "$versions" ]] && versions+="$separator"
+      versions+="🎵 $node_version"
   fi
 
-  local virtualenv_path="$VIRTUAL_ENV"
-  if [[ -n $virtualenv_path && -n $VIRTUAL_ENV_DISABLE_PROMPT ]]; then
-    prompt_segment $WILDCHERRY_VIRTUALENV_BG $WILDCHERRY_VIRTUALENV_FG $WILDCHERRY_VIRTUALENV_PREFIX"  $(basename $virtualenv_path)"
-  fi
-}
-
-# NVM: Node version manager
-prompt_nvm() {
-  if [[ $WILDCHERRY_NVM_SHOW == false ]] then
-    return
+  # Python
+  local python_version=$(echo "$mise_output" | awk '$1 == "python" {print $2}')
+  if [[ -n "$python_version" ]]; then
+      [[ -n "$versions" ]] && versions+="$separator"
+      versions+="🐍 $python_version"
   fi
 
-  $(type nvm >/dev/null 2>&1) || return
+  # Ruby
+  local ruby_version=$(echo "$mise_output" | awk '$1 == "ruby" {print $2}')
+  if [[ -n "$ruby_version" ]]; then
+      [[ -n "$versions" ]] && versions+="$separator"
+      versions+="💎 $ruby_version"
+  fi
 
-  local nvm_prompt
-  nvm_prompt=$(node -v 2>/dev/null)
-  [[ "${nvm_prompt}x" == "x" ]] && return
-  nvm_prompt=${nvm_prompt:1}
-  prompt_segment $WILDCHERRY_NVM_BG $WILDCHERRY_NVM_FG $WILDCHERRY_NVM_PREFIX$nvm_prompt
+  prompt_segment $WILDCHERRY_MISE_BG $WILDCHERRY_MISE_FG $versions
 }
 
 prompt_time() {
@@ -349,7 +277,7 @@ prompt_time() {
     return
   fi
 
-  prompt_segment $WILDCHERRY_TIME_BG $WILDCHERRY_TIME_FG '🔮  %D{%H:%M:%S} '
+  prompt_segment $WILDCHERRY_TIME_BG $WILDCHERRY_TIME_FG '🔮  %D{%H:%M:%S}'
 }
 
 # Status:
@@ -400,13 +328,10 @@ build_prompt() {
   RETVAL=$?
   prompt_time
   prompt_status
-  prompt_rvm
-  prompt_virtualenv
-  prompt_nvm
   prompt_context
   prompt_dir
+  prompt_mise
   prompt_git
-  # prompt_hg
   prompt_end
 }
 
