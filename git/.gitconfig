@@ -1,28 +1,34 @@
 [user]
-        name = Christina Chan
-        email = 6462356+cchawn@users.noreply.github.com
+  name = Christina Chan
+  email = 6462356+cchawn@users.noreply.github.com
 [core]
-	excludesfile = /Users/cchan/.gitignore_global
+  excludesfile = /Users/cchan/.gitignore_global
 [alias]
-        co = checkout
-        br = branch
-        ci = commit
-        st = status
-        undo = reset HEAD~
-        unstage = reset HEAD --
-        last = log -1 HEAD
-        cameo = commit -a --amend --no-edit
-        cam = commit -am
+  co = checkout
+  br = branch
+  ci = commit
+  st = status
+  undo = reset HEAD~
+  unstage = reset HEAD --
+  last = log -1 HEAD
+  cameo = commit -a --amend --no-edit
+  cam = commit -am
+  gone = "!f() { git fetch --all --prune; git branch -vv | awk '/: gone]/{print $1}' | xargs git branch -D; }; f"
 [init]
-        templatedir = ~/.git-templates
-	defaultBranch = main
+  templatedir = ~/.git-templates
+  defaultBranch = main
 [remote "origin"]
-        prune = true
+  prune = true
 [diff "ansible-vault"]
-        textconv = ansible-vault view
-        cachetextconv = false
+  textconv = ansible-vault view
+  cachetextconv = false
 [filter "lfs"]
-        required = true
-        clean = git-lfs clean -- %f
-        smudge = git-lfs smudge -- %f
-        process = git-lfs filter-process
+  required = true
+  clean = git-lfs clean -- %f
+  smudge = git-lfs smudge -- %f
+  process = git-lfs filter-process
+
+[url "ssh://git@github.com/"]
+  insteadOf = https://github.com/
+[push]
+	autoSetupRemote = true
