@@ -36,15 +36,15 @@ if [ ! -n "${WILDCHERRY_TIME_FG+1}" ]; then
   WILDCHERRY_TIME_FG=white
 fi
 
-# MISE
-if [ ! -n "${WILDCHERRY_MISE_SHOW+1}" ]; then
-  WILDCHERRY_MISE_SHOW=true
+# RUNTIME VERSIONS
+if [ ! -n "${WILDCHERRY_VERSIONS_SHOW+1}" ]; then
+  WILDCHERRY_VERSIONS_SHOW=true
 fi
-if [ ! -n "${WILDCHERRY_MISE_BG+1}" ]; then
-  WILDCHERRY_MISE_BG=magenta
+if [ ! -n "${WILDCHERRY_VERSIONS_BG+1}" ]; then
+  WILDCHERRY_VERSIONS_BG=magenta
 fi
-if [ ! -n "${WILDCHERRY_MISE_FG+1}" ]; then
-  WILDCHERRY_MISE_FG=white
+if [ ! -n "${WILDCHERRY_VERSIONS_FG+1}" ]; then
+  WILDCHERRY_VERSIONS_FG=white
 fi
 
 # DIR
@@ -237,39 +237,42 @@ prompt_dir() {
   prompt_segment $WILDCHERRY_DIR_BG $WILDCHERRY_DIR_FG $dir
 }
 
-prompt_mise() {
+prompt_versions() {
   local versions=""
   local separator=" "
 
-  if ! command -v mise &> /dev/null; then
-    return
-  fi
+  # if ! command -v mise &> /dev/null; then
+  #   return
+  # fi
 
   # Get mise output
-  local mise_output=$(mise current 2>/dev/null)
+  # local mise_output=$(mise current 2>/dev/null)
 
   # Node
-  local node_version=$(echo "$mise_output" | awk '$1 == "node" {print $2}')
+  # local node_version=$(echo "$mise_output" | awk '$1 == "node" {print $2}')
+  local node_version=$(node --version)
   if [[ -n "$node_version" ]]; then
       [[ -n "$versions" ]] && versions+="$separator"
       versions+="🎵 $node_version"
   fi
 
   # Python
-  local python_version=$(echo "$mise_output" | awk '$1 == "python" {print $2}')
+  # local python_version=$(echo "$mise_output" | awk '$1 == "python" {print $2}')
+  local python_version=$(python --version | awk '{print $2}')
   if [[ -n "$python_version" ]]; then
       [[ -n "$versions" ]] && versions+="$separator"
       versions+="🐍 $python_version"
   fi
 
   # Ruby
-  local ruby_version=$(echo "$mise_output" | awk '$1 == "ruby" {print $2}')
+  # local ruby_version=$(echo "$mise_output" | awk '$1 == "ruby" {print $2}')
+  local ruby_version=$(ruby --version | awk '{print $2}')
   if [[ -n "$ruby_version" ]]; then
       [[ -n "$versions" ]] && versions+="$separator"
       versions+="💎 $ruby_version"
   fi
 
-  prompt_segment $WILDCHERRY_MISE_BG $WILDCHERRY_MISE_FG $versions
+  prompt_segment $WILDCHERRY_VERSIONS_BG $WILDCHERRY_VERSIONS_FG $versions
 }
 
 prompt_time() {
@@ -330,7 +333,7 @@ build_prompt() {
   prompt_status
   prompt_context
   prompt_dir
-  prompt_mise
+  prompt_versions
   prompt_git
   prompt_end
 }
