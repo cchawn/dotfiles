@@ -1,9 +1,6 @@
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
 
-# Path to your Oh My Zsh installation.
-export ZSH="$HOME/.oh-my-zsh"
-
 # Theme
 ZSH_THEME="wild-cherry"
 
@@ -12,17 +9,6 @@ ZSH_THEME="wild-cherry"
 
 # Plugins
 plugins=(git z 1password zsh-autocomplete zsh-syntax-highlighting zsh-autosuggestions)
-
-# Uncomment one of the following lines to change the auto-update behavior
-# zstyle ':omz:update' mode disabled  # disable automatic updates
-zstyle ':omz:update' mode auto      # update automatically without asking
-# zstyle ':omz:update' mode reminder  # just remind me to update when it's time
-
-# Uncomment the following line to change how often to auto-update (in days).
-zstyle ':omz:update' frequency 13
-
-# git prompt
-zstyle ':omz:alpha:lib:git' async-prompt no
 
 # Uncomment the following line if pasting URLs and other text is messed up.
 # DISABLE_MAGIC_FUNCTIONS="true"
@@ -52,15 +38,13 @@ zstyle ':omz:alpha:lib:git' async-prompt no
 # see 'man strftime' for details.
 # HIST_STAMPS="mm/dd/yyyy"
 
-source $ZSH/oh-my-zsh.sh
-
 ######################
 # User configuration #
 ######################
 
 # aliases
 alias be="bundle exec"
-
+alias g="git"
 
 # direnv
 eval "$(direnv hook zsh)"
@@ -74,3 +58,5 @@ source /Users/cchan/.config/wealthsimple/nvm/config.zsh
 export PYENV_ROOT="$HOME/.pyenv"
 [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
+
+eval "$(starship init zsh)"
