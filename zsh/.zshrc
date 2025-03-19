@@ -12,12 +12,6 @@ alias g="git"
 # direnv
 eval "$(direnv hook zsh)"
 
-# ws-cli
-eval "$(ws hook zsh)"
-
-source /Users/cchan/.config/wealthsimple/rbenv/config.zsh
-source /Users/cchan/.config/wealthsimple/direnv/config.zsh
-source /Users/cchan/.config/wealthsimple/nvm/config.zsh
 export PYENV_ROOT="$HOME/.pyenv"
 [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
