@@ -1,0 +1,98 @@
+# Need a nerd font for additional icons (e.g. FiraCode Nerd Font)
+# https://www.nerdfonts.com/font-downloads
+
+format = """
+$time\
+$character\
+$username\
+[](bg:cyan fg:pink)\
+$directory\
+[](fg:cyan bg:orange)\
+$git_branch\
+$git_status\
+[](fg:orange bg:yellow)\
+$deno\
+$nodejs\
+$python\
+$ruby\
+[ ](fg:yellow)\
+"""
+
+# Use the Dracula color palette
+# https://github.com/dracula/starship
+palette = "dracula"
+
+[palettes.dracula]
+background = "#282a36"
+current_line = "#44475a"
+foreground = "#f8f8f2"
+comment = "#6272a4"
+cyan = "#8be9fd"
+cyan_fg = "#003f5c"
+green = "#50fa7b"
+green_fg = "#004d40"
+orange = "#ffb86c"
+orange_fg = "#5f4120"
+pink = "#ff79c6"
+pink_fg = "#6d0f3f"
+purple = "#bd93f9"
+purple_fg = "#46237a"
+red = "#ff5555"
+red_fg = "#8b0000"
+yellow = "#f1fa8c"
+yellow_fg = "#715b17"
+
+
+[time]
+disabled = false
+time_format = "%R" # Hour:Minute Format
+format = '[](purple)[🔮 $time ](bg:purple fg:purple_fg)'
+
+[username]
+show_always = true
+format = '[ 👸 ](bg:pink fg:pink_fg)'
+disabled = false
+
+[directory]
+format = "[ 🏰 $path ](bg:cyan fg:cyan_fg)"
+truncation_length = 0
+truncate_to_repo = true
+
+[git_branch]
+symbol = ""
+format = '[ $symbol $branch ](bg:orange fg:orange_fg)'
+
+[git_status]
+conflicted = '🏳 '
+ahead = '👆'
+behind = '👇'
+diverged = '💀 '
+up_to_date = '🌷'
+untracked = '🎀 '
+stashed = ''
+modified = '⚔️ '
+staged = '💅 '
+renamed = '⚡️ '
+deleted = '💥 '
+format = '[$all_status$ahead_behind ](bg:orange)'
+
+[deno]
+symbol = "🦕"
+format = '[ $symbol ($version) ](bg:yellow fg:yellow_fg)'
+
+[nodejs]
+symbol = "🎵"
+format = '[ $symbol ($version) ](bg:yellow fg:yellow_fg)'
+
+[python]
+symbol = "🐍"
+format = '[ $symbol ($version) ](bg:yellow fg:yellow_fg)'
+
+[ruby]
+symbol = "💎"
+format = '[ $symbol ($version) ](bg:yellow fg:yellow_fg)'
+
+[character]
+success_symbol = '[](bg:pink fg:purple)'
+error_symbol = '[](bg:red purple)[ 👹 ](red bg:red)[](red bg:pink)'
+format = '$symbol'
