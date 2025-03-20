@@ -1,0 +1,30 @@
+# macOS
+.DS_Store
+
+# editors
+.vscode/*
+.vsls.json
+.idea/*
+*.iml
+
+# direnv
+.envrc
+.direnv
+
+# deno
+deno.lock
+
+# mise
+mise.local.toml
+
+# log files
+*.*log
+
+# ignore these directories
+**/local
+**/tmp
+**/secrets
+**/private/*
+
+# keep these files
+!/**/.keep
