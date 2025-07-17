@@ -29,6 +29,6 @@
   process = git-lfs filter-process
 
 [url "ssh://git@github.com/"]
-  insteadOf = https://github.com/
+	insteadOf = https://github.com/
 [push]
 	autoSetupRemote = true
