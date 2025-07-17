@@ -1,0 +1,9 @@
+[tools]
+node = "latest"
+python = "3.11"
+ruby = "3.4"
+deno = "latest"
+"npm:@anthropic-ai/claude-code" = "latest"
+
+[settings]
+idiomatic_version_file_enable_tools = ["node", "python", "ruby", "java"]
