@@ -9,9 +9,8 @@ alias g="git"
 # direnv
 eval "$(direnv hook zsh)"
 
-export PYENV_ROOT="$HOME/.pyenv"
-[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
+# mise
+eval "$(mise activate zsh)"
 
 eval "$(starship init zsh)"
 
