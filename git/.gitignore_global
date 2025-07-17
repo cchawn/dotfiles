@@ -8,8 +8,18 @@
 # log files
 *.*log
 
+# direnv
+.envrc
+.direnv
+
+# log files
+*.*log
+
 # ignore these directories
 **/local
 **/private
 **/secrets
 **/tmp
+
+# keep these files
+!/**/.keep
