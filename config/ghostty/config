@@ -1,13 +1,14 @@
+################
+# Appearance   #
+################
+
 # Font
 font-family = "FiraCode Nerd Font Mono"
-font-size = 16
+font-size = 14
 
-# Theme / Colours
+# Theme and Colours
 theme = WildCherry
 background = #1f1726
-cursor-color = #dd00ff
-cursor-opacity = 0.5
-cursor-text = #ff00fe
 foreground = #dafaff
 palette = 0=#000507
 palette = 1=#d94085
@@ -27,3 +28,46 @@ palette = 8=#009cc9
 palette = 9=#da6bac
 selection-background = #002831
 selection-foreground = #e4ffff
+
+# Cursor
+cursor-color = #dd00ff
+cursor-opacity = 0.5
+cursor-style = block
+cursor-style-blink = false
+cursor-text = #ff00fe
+
+# Window
+window-padding-x = 10
+window-padding-y = 10
+window-decoration = true
+
+################
+# Key Bindings #
+################
+
+# Split panes
+keybind = cmd+d=new_split:right
+keybind = cmd+shift+d=new_split:down
+
+# Font size
+keybind = cmd+plus=increase_font_size:1
+keybind = cmd+minus=decrease_font_size:1
+keybind = cmd+0=reset_font_size
+
+# Copy/Paste
+keybind = cmd+c=copy_to_clipboard
+keybind = cmd+v=paste_from_clipboard
+
+# Zoom
+keybind = cmd+shift+enter=toggle_fullscreen
+
+################
+# Advanced     #
+################
+clipboard-read = allow
+clipboard-write = allow
+confirm-close-surface = false
+
+# Shell Integration
+shell-integration = zsh
+shell-integration-features = cursor,sudo,title
