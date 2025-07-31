@@ -1,34 +1,141 @@
 [user]
   name = Christina Chan
   email = 6462356+cchawn@users.noreply.github.com
+
+[init]
+  defaultBranch = main
+  templatedir = ~/.git-templates
+
 [core]
-  excludesfile = /Users/cchan/.gitignore_global
+  excludesfile = ~/.gitignore
+  attributesfile = ~/.gitattributes
+  whitespace = space-before-tab,-indent-with-non-tab,trailing-space
+  trustctime = false
+  precomposeunicode = false
+  untrackedCache = true
+  autocrlf = false
+  pager = diff-so-fancy | less --tabs=4 -RF
+
 [alias]
-  co = checkout
+  aliases = config --get-regexp alias
+  amend = commit --amend --reuse-message=HEAD
+  b = branch
   br = branch
+  branches = branch -a
+  c = clone --recursive
+  ca = !git add -A && git commit -av
+  cam = commit -am
+  cameo = commit -a --amend --no-edit
   ci = commit
+  co = checkout
+  contributors = shortlog --summary --numbered
+  credit = "!f() { git commit --amend --author \"$1 <$2>\" -C HEAD; }; f"
+  gone = "!f() { git fetch --all --prune; git branch -vv | awk '/: gone]/{print $1}' | xargs git branch -D; }; f"
+  l = log --pretty=oneline -n 20 --graph --abbrev-commit
+  last = log -1 HEAD
+  remotes = remote -v
+  s = status -s
   st = status
+  tags = tag -l
   undo = reset HEAD~
   unstage = reset HEAD --
-  last = log -1 HEAD
-  cameo = commit -a --amend --no-edit
-  cam = commit -am
-  gone = "!f() { git fetch --all --prune; git branch -vv | awk '/: gone]/{print $1}' | xargs git branch -D; }; f"
-[init]
-  templatedir = ~/.git-templates
-  defaultBranch = main
-[remote "origin"]
-  prune = true
+
+[color]
+  ui = auto
+
+[color "branch"]
+  current = yellow reverse
+  local = yellow
+  remote = green
+
+[color "diff"]
+  meta = yellow bold
+  frag = magenta bold
+  old = red
+  new = green
+
+[color "status"]
+  added = yellow
+  changed = green
+  untracked = cyan
+
+[diff]
+  renames = copies
+  algorithm = histogram
+  colorMoved = default
+  indentHeuristic = true
+
+[diff "bin"]
+  textconv = hexdump -v -C
+
 [diff "ansible-vault"]
   textconv = ansible-vault view
   cachetextconv = false
+
+[branch]
+  sort = -committerdate
+  autoSetupMerge = always
+  autoSetupRebase = always
+
+[status]
+  showUntrackedFiles = all
+  submoduleSummary = true
+
+[log]
+  date = relative
+  follow = true
+
+[fetch]
+  prune = true
+  tags = true
+  parallel = 4
+
+[pull]
+  ff = only
+
+[push]
+  default = simple
+  followTags = true
+  autoSetupRemote = true
+
+[rebase]
+  autoStash = true
+  backend = merge
+
+[merge]
+  log = true
+  conflictstyle = diff3
+  automerge = true
+
+[apply]
+  whitespace = fix
+
+[help]
+  autocorrect = 1
+
+[remote "origin"]
+  prune = true
+
+[url "ssh://git@github.com/"]
+  insteadOf = https://github.com/
+
+[url "git@github.com:"]
+  pushInsteadOf = "github:"
+  pushInsteadOf = "git://github.com/"
+
+[url "git://github.com/"]
+  insteadOf = "github:"
+
+[url "git@gist.github.com:"]
+  insteadOf = "gst:"
+  pushInsteadOf = "gist:"
+  pushInsteadOf = "git://gist.github.com/"
+
+[url "git://gist.github.com/"]
+  insteadOf = "gist:"
+
 [filter "lfs"]
   required = true
   clean = git-lfs clean -- %f
   smudge = git-lfs smudge -- %f
   process = git-lfs filter-process
-
-[url "ssh://git@github.com/"]
-	insteadOf = https://github.com/
-[push]
-	autoSetupRemote = true
