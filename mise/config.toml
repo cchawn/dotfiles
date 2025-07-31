@@ -1,6 +1,6 @@
 [tools]
 node = "latest"
-python = "3.11"
+python = "latest"
 ruby = "3.4"
 deno = "latest"
 "npm:@anthropic-ai/claude-code" = "latest"
