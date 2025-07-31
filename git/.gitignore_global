@@ -12,6 +12,11 @@
 .envrc
 .direnv
 
+# AI Coding Agents
+.aider*
+.claude/*
+.claude*
+
 # log files
 *.*log
 
