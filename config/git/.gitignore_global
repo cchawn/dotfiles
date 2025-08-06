@@ -14,8 +14,7 @@
 
 # AI Coding Agents
 .aider*
-.claude/*
-.claude*
+.claude/settings.local.json
 
 # log files
 *.*log
