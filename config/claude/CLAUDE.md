@@ -95,6 +95,9 @@ YOU MUST follow this debugging framework for ANY technical issue:
 - CRITICAL: NEVER USE --no-verify WHEN COMMITTING CODE
 - Fix any pre-commit hook failures before committing
 - If you cannot fix hook failures, ask for help rather than bypassing them
+- Use semantic commits (i.e. prefix the commit message with `fix:`, `feat:`, `chore:` appropriately)
+- Ensure the first line of the commit message is NEVER longer than 80 characters
+- DO NOT add yourself as a coauthor for commits unless specified
 
 ### Work vs Personal Projects
 
