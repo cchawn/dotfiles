@@ -65,7 +65,7 @@ main() {
     
     # Claude Code configuration (if it exists)
     if [[ -f "$DOTFILES_DIR/config/claude/CLAUDE.md" ]]; then
-        create_symlink "$DOTFILES_DIR/config/claude" "$HOME/.config/claude"
+        create_symlink "$DOTFILES_DIR/config/claude" "$HOME/.claude"
     fi
     
     # Source private configurations if they exist
