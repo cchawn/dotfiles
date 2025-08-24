@@ -58,4 +58,6 @@ docker_login_to_aws_ecr() {
 ######################
 # Work configuration #
 ######################
-source /Users/cchan/Workspace/dotfiles/private/work.zsh
+if [[ -f /Users/cchan/Workspace/dotfiles/private/work.zsh ]]; then
+  source /Users/cchan/Workspace/dotfiles/private/work.zsh
+fi
