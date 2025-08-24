@@ -15,5 +15,10 @@ cask "ghostty"
 brew "jq"
 brew "tree"
 
+# Zsh plugins
+brew "zsh-autosuggestions"
+brew "zsh-syntax-highlighting"
+brew "fzf"
+
 # Fonts (for starship themes with nerd font icons)
 cask "font-fira-code-nerd-font"
