@@ -95,8 +95,8 @@ YOU MUST follow this debugging framework for ANY technical issue:
 - CRITICAL: NEVER USE --no-verify WHEN COMMITTING CODE
 - Fix any pre-commit hook failures before committing
 - If you cannot fix hook failures, ask for help rather than bypassing them
-- Use semantic commits (i.e. prefix the commit message with `fix:`, `feat:`, `chore:` appropriately)
-- Ensure the first line of the commit message is NEVER longer than 80 characters
+- Commit messages should be descriptive, clear, and concise (the first line should be no longer than 80 characters)
+- Use semantic commits, the commit message should be prefixed with `fix:`, `feat:`, `chore:` appropriately
 - DO NOT add yourself as a coauthor for commits unless specified
 
 ### Work vs Personal Projects
@@ -104,17 +104,18 @@ YOU MUST follow this debugging framework for ANY technical issue:
 To determine project type, run: `git remote get-url origin`
 
 **Work Projects**:
+
 - When the remote URL does NOT contain "cchawn" as the username
 - Example: git@github.com:company-name/my-repo.git
-- Use Graphite CLI for branch management and commits
 
 **Personal Projects**:
-- When the remote URL contains "cchawn" as the username  
+
+- When the remote URL contains "cchawn" as the username
 - Example: git@github.com:cchawn/my-repo.git
 - Use standard git workflow
 - When starting work without a clear branch for the current task, YOU MUST create a WIP branch
-- Do NOT use Graphite for personal projects
 
 **Edge Cases**:
+
 - If no remote is configured, ask Christina which type of project this is
 - If multiple remotes exist, use the 'origin' remote for determination
