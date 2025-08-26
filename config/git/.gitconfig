@@ -1,20 +1,7 @@
 [user]
-  name = Christina Chan
   email = 6462356+cchawn@users.noreply.github.com
-
-[init]
-  defaultBranch = main
-  templatedir = ~/.git-templates
-
-[core]
-  excludesfile = ~/.gitignore_global
-  attributesfile = ~/.gitattributes
-  whitespace = space-before-tab,-indent-with-non-tab,trailing-space
-  trustctime = false
-  precomposeunicode = false
-  untrackedCache = true
-  autocrlf = false
-  pager = diff-so-fancy | less --tabs=4 -RF
+  name = Christina Chan
+  signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFqz6+S76xBjDiC/s2lmjYnzeT/gNO4/BpOZeIBSFZFy
 
 [alias]
   aliases = config --get-regexp alias
@@ -40,6 +27,14 @@
   undo = reset HEAD~
   unstage = reset HEAD --
 
+[apply]
+  whitespace = fix
+
+[branch]
+  autoSetupMerge = always
+  autoSetupRebase = always
+  sort = -committerdate
+
 [color]
   ui = auto
 
@@ -49,79 +44,96 @@
   remote = green
 
 [color "diff"]
-  meta = yellow bold
   frag = magenta bold
-  old = red
+  meta = yellow bold
   new = green
+  old = red
 
 [color "status"]
   added = yellow
   changed = green
   untracked = cyan
 
+[commit]
+  gpgsign = true
+
+[core]
+  attributesfile = ~/.gitattributes
+  autocrlf = false
+  excludesfile = ~/.gitignore_global
+  pager = diff-so-fancy | less --tabs=4 -RF
+  precomposeunicode = false
+  trustctime = false
+  untrackedCache = true
+  whitespace = space-before-tab,-indent-with-non-tab,trailing-space
+
 [diff]
-  renames = copies
   algorithm = histogram
   colorMoved = default
   indentHeuristic = true
+  renames = copies
+
+[diff "ansible-vault"]
+  cachetextconv = false
+  textconv = ansible-vault view
 
 [diff "bin"]
   textconv = hexdump -v -C
 
-[diff "ansible-vault"]
-  textconv = ansible-vault view
-  cachetextconv = false
+[fetch]
+  parallel = 4
+  prune = true
+  tags = true
 
-[branch]
-  sort = -committerdate
-  autoSetupMerge = always
-  autoSetupRebase = always
+[filter "lfs"]
+  clean = git-lfs clean -- %f
+  process = git-lfs filter-process
+  required = true
+  smudge = git-lfs smudge -- %f
 
-[status]
-  showUntrackedFiles = all
-  submoduleSummary = true
+[gpg]
+  format = ssh
+
+[gpg "ssh"]
+  program = /Applications/1Password.app/Contents/MacOS/op-ssh-sign
+
+[help]
+  autocorrect = 1
+
+[init]
+  defaultBranch = main
+  templatedir = ~/.git-templates
 
 [log]
   date = relative
   follow = true
 
-[fetch]
-  prune = true
-  tags = true
-  parallel = 4
+[merge]
+  automerge = true
+  conflictstyle = diff3
+  log = true
 
 [pull]
   ff = only
 
 [push]
+  autoSetupRemote = true
   default = simple
   followTags = true
-  autoSetupRemote = true
 
 [rebase]
   autoStash = true
   backend = merge
 
-[merge]
-  log = true
-  conflictstyle = diff3
-  automerge = true
-
-[apply]
-  whitespace = fix
-
-[help]
-  autocorrect = 1
-
 [remote "origin"]
   prune = true
 
-[url "ssh://git@github.com/"]
-  insteadOf = https://github.com/
+[status]
+  showUntrackedFiles = all
+  submoduleSummary = true
 
-[url "git@github.com:"]
-  pushInsteadOf = "github:"
-  pushInsteadOf = "git://github.com/"
+[url "git://gist.github.com/"]
+  insteadOf = "gist:"
 
 [url "git://github.com/"]
   insteadOf = "github:"
@@ -131,11 +143,10 @@
   pushInsteadOf = "gist:"
   pushInsteadOf = "git://gist.github.com/"
 
-[url "git://gist.github.com/"]
-  insteadOf = "gist:"
+[url "git@github.com:"]
+  pushInsteadOf = "github:"
+  pushInsteadOf = "git://github.com/"
 
-[filter "lfs"]
-  required = true
-  clean = git-lfs clean -- %f
-  smudge = git-lfs smudge -- %f
-  process = git-lfs filter-process
+[url "ssh://git@github.com/"]
+  insteadOf = https://github.com/
+
