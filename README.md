@@ -4,7 +4,7 @@ Welcome to my dotfiles!
 
 ## Setup
 
-**Prerequisites:** macOS + [Homebrew](https://brew.sh/).
+**Prerequisites:** macOS + [Homebrew](https://brew.sh/) + [1Password for SSH & Git](https://developer.1password.com/docs/ssh/).
 
 ### Quick Installation
 
@@ -49,6 +49,7 @@ mise install
 - ✨ **diff-so-fancy** - Makes git diffs readable
 - 🔍 **jq** - JSON processor
 - 🌲 **tree** - See your folders in all their glory
+- 🔐 **1Password** – Password manager CLI!
 
 ### Fun & Flavour
 - 🎨 **FiraCode Nerd Font** - Icons in your terminal!

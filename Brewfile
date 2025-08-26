@@ -5,8 +5,9 @@ brew "starship"
 brew "zsh"
 
 # Git
-brew "git"
 brew "diff-so-fancy"
+brew "gh"
+brew "git"
 
 # Terminal emulator
 cask "ghostty"
@@ -14,11 +15,12 @@ cask "ghostty"
 # Development tools
 brew "jq"
 brew "tree"
+brew "1password-cli"
 
 # Zsh plugins
+brew "fzf"
 brew "zsh-autosuggestions"
 brew "zsh-syntax-highlighting"
-brew "fzf"
 
 # Fonts (for starship themes with nerd font icons)
 cask "font-fira-code-nerd-font"
