@@ -31,7 +31,7 @@
   whitespace = fix
 
 [branch]
-  autoSetupMerge = always
+  autoSetupMerge = simple
   autoSetupRebase = always
   sort = -committerdate
 
@@ -118,7 +118,7 @@
 
 [push]
   autoSetupRemote = true
-  default = simple
+  default = current
   followTags = true
 
 [rebase]
