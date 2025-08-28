@@ -54,9 +54,6 @@
   changed = green
   untracked = cyan
 
-[commit]
-  gpgsign = true
-
 [core]
   attributesfile = ~/.gitattributes
   autocrlf = false
@@ -90,12 +87,6 @@
   process = git-lfs filter-process
   required = true
   smudge = git-lfs smudge -- %f
-
-[gpg]
-  format = ssh
-
-[gpg "ssh"]
-  program = /Applications/1Password.app/Contents/MacOS/op-ssh-sign
 
 [help]
   autocorrect = 1
