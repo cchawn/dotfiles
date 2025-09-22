@@ -7,7 +7,7 @@ font-family = "FiraCode Nerd Font Mono"
 font-size = 14
 
 # Theme and Colours
-theme = WildCherry
+theme = Wild Cherry
 background = #1f1726
 foreground = #dafaff
 palette = 0=#000507
