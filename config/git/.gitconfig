@@ -1,6 +1,16 @@
 [user]
   email = 6462356+cchawn@users.noreply.github.com
   name = Christina Chan
+  signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFqz6+S76xBjDiC/s2lmjYnzeT/gNO4/BpOZeIBSFZFy
+
+[gpg]
+  format = ssh
+
+[gpg "ssh"]
+  program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign"
+
+[commit]
+  gpgsign = true
 
 [alias]
   aliases = config --get-regexp alias
