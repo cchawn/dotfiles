@@ -4,6 +4,7 @@ python = "latest"
 ruby = "3.4"
 deno = "latest"
 "npm:@anthropic-ai/claude-code" = "latest"
+"npm:@devcontainers/cli" = "0.80.1"
 
 [settings]
 idiomatic_version_file_enable_tools = ["node", "python", "ruby", "java"]
