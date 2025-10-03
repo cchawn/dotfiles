@@ -15,7 +15,7 @@ $deno\
 $nodejs\
 $python\
 $ruby\
-[ ](fg:yellow)\
+[ ](fg:yellow) \
 """
 
 # Use the Dracula color palette
