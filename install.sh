@@ -62,7 +62,10 @@ main() {
     
     # Mise version manager
     create_symlink "$DOTFILES_DIR/config/mise/config.toml" "$HOME/.config/mise/config.toml"
-    
+
+    # Zed editor
+    create_symlink "$DOTFILES_DIR/config/zed/settings.json" "$HOME/.config/zed/settings.json"
+
     # Claude Code configuration (if it exists)
     if [[ -f "$DOTFILES_DIR/config/claude/CLAUDE.md" ]]; then
         create_symlink "$DOTFILES_DIR/config/claude" "$HOME/.claude"

@@ -47,6 +47,7 @@ mise install
 ### Development Essentials
 - 🔀 **git** - Version control
 - ✨ **diff-so-fancy** - Makes git diffs readable
+- ✏️ **zed** - High-performance code editor
 - 🔍 **jq** - JSON processor
 - 🌲 **tree** - See your folders in all their glory
 - 🔐 **1Password** – Password manager CLI!

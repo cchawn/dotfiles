@@ -12,6 +12,9 @@ brew "git"
 # Terminal emulator
 cask "ghostty"
 
+# Editor
+cask "zed"
+
 # Development tools
 brew "jq"
 brew "tree"
