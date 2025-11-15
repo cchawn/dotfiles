@@ -18,7 +18,7 @@ cask "zed"
 # Development tools
 brew "jq"
 brew "tree"
-brew "1password-cli"
+# brew "1password-cli"
 
 # Zsh plugins
 brew "fzf"

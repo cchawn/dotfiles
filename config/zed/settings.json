@@ -7,6 +7,20 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "agent": {
+    "default_model": {
+      "provider": "anthropic",
+      "model": "claude-sonnet-4-5-latest"
+    },
+    "model_parameters": []
+  },
+  "agent_servers": {
+    "your_agent": {
+      "command": "path_to_executable",
+      "args": [],
+      "env": {}
+    }
+  },
   "show_edit_predictions": false,
   "minimap": {
     "show": "auto"
@@ -49,7 +63,7 @@
   "buffer_font_size": 14,
   "theme": {
     "mode": "dark",
-    "light": "One Light",
+    "light": "Catppuccin Macchiato",
     "dark": "Catppuccin Macchiato"
   },
   "format_on_save": "on",
