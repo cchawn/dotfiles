@@ -1,7 +1,7 @@
-[user]
-  email = 6462356+cchawn@users.noreply.github.com
-  name = Christina Chan
-  signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFqz6+S76xBjDiC/s2lmjYnzeT/gNO4/BpOZeIBSFZFy
+# Include user-specific configuration (name, email, signing key)
+# This file should be created in private/git/user.gitconfig
+[include]
+  path = ~/.gitconfig.user
 
 [gpg]
   format = ssh

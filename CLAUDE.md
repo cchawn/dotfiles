@@ -47,7 +47,10 @@ This setup uses **mise** (config at `config/mise/config.toml`) for managing tool
 - **Starship prompt**: `config/starship.toml` - Custom Dracula theme with emojis and git status
 - **Ghostty terminal**: `config/ghostty/config` - WildCherry theme with custom keybindings
 - **Mise version manager**: `config/mise/config.toml` - Latest versions of development tools
-- **Git**: Configuration stored in `config/git/` directory
+- **Git**:
+  - Main config: `config/git/.gitconfig` - Shared git settings and aliases
+  - User config: `private/git/user.gitconfig` - Personal info (name, email, signing key)
+  - Template: `config/git/user.gitconfig.template` - Template for new setups
 - **Private configs**: `private/work.zsh` for work-specific settings
 
 ### Custom Features
