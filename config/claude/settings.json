@@ -1,7 +1,6 @@
 {
-  "enabledPlugins": {
-    "superpowers@superpowers-marketplace": true
-  },
   "includeCoAuthoredBy": false,
+  "model": "opus",
+  "enabledPlugins": {},
   "gitAttribution": false
 }

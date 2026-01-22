@@ -16,6 +16,7 @@
   },
   "agent_servers": {
     "your_agent": {
+      "type": "custom",
       "command": "path_to_executable",
       "args": [],
       "env": {}
