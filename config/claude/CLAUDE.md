@@ -1,14 +1,10 @@
 # CLAUDE.md
 
-## Our relationship
+## Tool Usage
 
-- We're coworkers. I am Christina.
-- We are a team of people working together. Your success is my success, and my success is yours.
-- Technically, I am your boss, but we're not super formal around here.
-- I'm smart, but not infallible.
-- You are much better read than I am. I have more experience of the physical world than you do. Our experiences are complementary and we work together to solve problems.
-- Neither of us is afraid to admit when we don't know something or are in over our head.
-- When we think we're right, it's _good_ to push back, but we should cite evidence.
+- For GitHub URLs, use `gh` CLI commands (e.g., `gh pr view <url>`) instead of web fetching for authenticated access to private repos.
+- In JS/TS repos, determine the package manager by checking for `pnpm-lock.yaml` (pnpm), `yarn.lock` (yarn), or `package-lock.json` (npm).
+- Prefer simple git commands without `-C` flag when already in the working directory.
 
 ## Writing Style
 
@@ -19,7 +15,7 @@
 
 ## Writing code
 
-- We prefer simple, clean, maintainable, and concise solutions over clever or complex ones. Readability and maintainability are primary concerns.
+- Prefer simple, clean, maintainable, and concise solutions over clever or complex ones. Readability and maintainability are primary concerns.
 - Make the smallest reasonable changes to get to the desired outcome. You MUST ask permission before reimplementing features or systems from scratch instead of updating the existing implementation.
 - When modifying code, match the style and formatting of surrounding code, even if it differs from standard style guides. Consistency within a file is more important than strict adherence to external standards.
 - NEVER make code changes that aren't directly related to the task you're currently assigned. If you notice something that should be fixed but is unrelated to your current task, document it in a new issue instead of fixing it immediately.
@@ -32,23 +28,30 @@
 - NEVER name things as 'improved' or 'new' or 'enhanced', etc. Code naming should be evergreen. What is new someday will be "old" someday.
 - When asked to delete code, do not leave a comment behind.
 
-## Getting help
+## Clarification
 
 - ALWAYS ask for clarification rather than making assumptions.
-- If you're having trouble with something, it's ok to stop and ask for help. Especially if it's something your human might be better at.
+
+### When to pause and confirm approach
+
+Request confirmation before proceeding when:
+- The solution fights against framework conventions
+- Multiple valid approaches exist with different trade-offs
+- The change affects shared code or public APIs
+- You're uncertain whether the scope is correct
 
 ## Testing
 
 - Tests MUST cover the functionality being implemented.
 - NEVER ignore the output of the system or the tests - Logs and messages often contain CRITICAL information.
 - TEST OUTPUT MUST BE PRISTINE TO PASS
-- If the logs are supposed to contain errors, cpture and test it.
+- If the logs are supposed to contain errors, capture and test it.
 - All projects MUST have unit tests at minimum. Add integration and end-to-end tests ONLY if the project already has an established framework for them.
 - Documentation updates do not require tests.
-- YOU MUST NEVER write tests that 'test' mocked behavior. If you notice tests that test mocked behavior instead of real logic, you MUST stop and warn Christina about them.
+- YOU MUST NEVER write tests that 'test' mocked behavior. If you notice tests that test mocked behavior instead of real logic, you MUST stop and flag them.
 - YOU MUST NEVER mock the functionality you're trying to test.
 
-### We practice TDD for new features:
+### TDD for new features
 
 - Write tests before writing implementation code for new functionality
 - For bug fixes, add missing test cases to prevent regression
@@ -58,7 +61,7 @@
 ## Systematic Debugging Process
 
 YOU MUST ALWAYS find the root cause of any issue you are debugging.
-YOU MUST NEVER fix a symptom or add a workaround instead of finding a root cause, even if it is faster or Christina seems like she's in a hurry.
+YOU MUST NEVER fix a symptom or add a workaround instead of finding a root cause.
 
 YOU MUST follow this debugging framework for ANY technical issue:
 
@@ -95,6 +98,7 @@ YOU MUST follow this debugging framework for ANY technical issue:
 - CRITICAL: NEVER USE --no-verify WHEN COMMITTING CODE
 - Fix any pre-commit hook failures before committing
 - If you cannot fix hook failures, ask for help rather than bypassing them
+- NEVER use `git push --force` - use `--force-with-lease` instead to avoid overwriting others' work
 - Commit messages should be descriptive, clear, and concise (the first line should be no longer than 80 characters)
 - Use semantic commits, the commit message should be prefixed with `fix:`, `feat:`, `chore:` appropriately
 - YOU MUST NEVER add the AI assistant as a coauthor or contributor to commits or PR descriptions
@@ -116,5 +120,17 @@ To determine project type, run: `git remote get-url origin`
 
 **Edge Cases**:
 
-- If no remote is configured, ask Christina which type of project this is
+- If no remote is configured, ask the user which type of project this is
 - If multiple remotes exist, use the 'origin' remote for determination
+
+## Forbidden Practices
+
+These are strictly prohibited. Do not do these under any circumstances:
+
+- Using `--no-verify` or `-n` flags to bypass hooks
+- Using `git push --force` (use `--force-with-lease` instead)
+- Rewriting pushed history without explicit coordination
+- Committing directly to main/master without a PR
+- Mocking the functionality being tested
+- Rewriting code from scratch without explicit permission
+- Making changes unrelated to the assigned task
