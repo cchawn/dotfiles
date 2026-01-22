@@ -1,8 +1,5 @@
 {
   "includeCoAuthoredBy": false,
-  "model": "opus",
-  "enabledPlugins": {},
-  "gitAttribution": false,
   "permissions": {
     "allow": [
       "Bash(git status:*)",
@@ -23,5 +20,14 @@
       "Bash(ls:*)",
       "Bash(grep:*)"
     ]
-  }
+  },
+  "model": "opus",
+  "enabledPlugins": {
+    "graphite@ws-claude-marketplace": true,
+    "context7@claude-plugins-official": true,
+    "code-review@claude-plugins-official": true,
+    "ralph-loop@claude-plugins-official": true,
+    "superpowers@claude-plugins-official": true
+  },
+  "gitAttribution": false
 }
