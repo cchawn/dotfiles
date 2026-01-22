@@ -2,5 +2,26 @@
   "includeCoAuthoredBy": false,
   "model": "opus",
   "enabledPlugins": {},
-  "gitAttribution": false
+  "gitAttribution": false,
+  "permissions": {
+    "allow": [
+      "Bash(git status:*)",
+      "Bash(git diff:*)",
+      "Bash(git log:*)",
+      "Bash(git add:*)",
+      "Bash(git push:*)",
+      "Bash(git checkout:*)",
+      "Bash(git fetch:*)",
+      "Bash(git branch:*)",
+      "Bash(yarn install:*)",
+      "Bash(bundle install:*)",
+      "Bash(jira:*)",
+      "Bash(gh pr view:*)",
+      "Bash(gh repo view:*)",
+      "Bash(gh run view:*)",
+      "Bash(find:*)",
+      "Bash(ls:*)",
+      "Bash(grep:*)"
+    ]
+  }
 }
