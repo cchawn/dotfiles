@@ -20,6 +20,7 @@ mise.local.toml
 # claude
 **/claude/*
 !**/claude/commands
+!**/claude/skills
 !**/claude/CLAUDE.md
 !**/claude/settings.json
 

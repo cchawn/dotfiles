@@ -18,7 +18,8 @@
       "Bash(gh run view:*)",
       "Bash(find:*)",
       "Bash(ls:*)",
-      "Bash(grep:*)"
+      "Bash(grep:*)",
+      "Skill(jira-cli)"
     ]
   },
   "model": "opus",
