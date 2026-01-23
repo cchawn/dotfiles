@@ -23,6 +23,7 @@ mise.local.toml
 !**/claude/skills
 !**/claude/CLAUDE.md
 !**/claude/settings.json
+!**/claude/statusline.sh
 
 # log files
 *.*log
@@ -35,3 +36,4 @@ mise.local.toml
 
 # keep these files
 !/**/.keep
+!/**/README.md
