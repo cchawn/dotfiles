@@ -6,6 +6,8 @@
 - Detect package manager: `pnpm-lock.yaml` → pnpm, `yarn.lock` → yarn, `package-lock.json` → npm
 - Check dependency files before assuming library availability
 - Prefer simple git commands without `-C` flag when already in the working directory.
+- Use `sentry-cli` skill for Sentry issues (URLs like `*.sentry.io/issues/*`)
+- Use `jira-cli` skill for Jira tickets (URLs like `*.atlassian.net/browse/*`)
 
 ## Style
 
