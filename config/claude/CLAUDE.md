@@ -5,6 +5,7 @@
 - Use `gh` CLI for interacting with GitHub (authenticated access)
 - Detect package manager: `pnpm-lock.yaml` → pnpm, `yarn.lock` → yarn, `package-lock.json` → npm
 - Check dependency files before assuming library availability
+- Prefer simple git commands without `-C` flag when already in the working directory.
 
 ## Style
 
