@@ -12,7 +12,7 @@ vim_mode=$(echo "$input" | jq -r '.vim.mode // empty')
 
 # Context window info
 remaining=$(echo "$input" | jq -r '.context_window.remaining_percentage // empty')
-used=$(echo "$input" | jq -r '.context_window.used_percentage // 0')
+used=$(echo "$input" | jq -r '.context_window.used_percentage // 0 | floor')
 
 # Colour palette
 ORANGE="\e[96m"
