@@ -42,7 +42,8 @@
       "Bash(tree:*)",
       "Bash(yarn:*)",
       "Skill(jira-cli)",
-      "Skill(sentry-cli)"
+      "Skill(sentry-cli)",
+      "mcp__datadog__*"
     ]
   },
   "model": "opus",
