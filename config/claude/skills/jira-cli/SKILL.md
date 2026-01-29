@@ -3,167 +3,220 @@ name: jira-cli
 description: Use when working with Jira issues, sprints, or epics from the command line. Covers listing, creating, viewing, and transitioning issues.
 ---
 
-# Jira CLI (jira-cli by ankitpokhrel)
+# Atlassian CLI (acli jira)
 
-Interactive Jira command line tool. Run `jira --help` for full command list.
+Official Atlassian command line tool. Run `acli jira --help` for full command list.
 
 ## Quick Reference
 
 | Action | Command |
 |--------|---------|
-| List issues | `jira issue list` |
-| View issue | `jira issue view ISSUE-1` |
-| Create issue | `jira issue create -tBug -s"Summary" -b"Description"` |
-| Transition issue | `jira issue move ISSUE-1 "In Progress"` |
-| Assign issue | `jira issue assign ISSUE-1 username` |
-| Add comment | `jira issue comment add ISSUE-1 -b"Comment text"` |
-| Open in browser | `jira open ISSUE-1` |
-| List sprints | `jira sprint list` |
-| List epics | `jira epic list` |
+| List issues | `acli jira workitem search --jql "project = PROJ"` |
+| View issue | `acli jira workitem view KEY-1` |
+| Create issue | `acli jira workitem create -p PROJ -t Bug -s "Summary" -d "Description"` |
+| Transition issue | `acli jira workitem transition -k KEY-1 -s "In Progress"` |
+| Assign issue | `acli jira workitem assign -k KEY-1 -a "user@example.com"` |
+| Add comment | `acli jira workitem comment create -k KEY-1 -b "Comment text"` |
+| Open in browser | `acli jira workitem view KEY-1 --web` |
+| List sprints | `acli jira board list-sprints --board-id BOARD_ID` |
 
-## Listing Issues
+## Searching Issues
 
 ```bash
-# Basic list (interactive mode)
-jira issue list
+# Search with JQL query
+acli jira workitem search --jql "project = PROJ"
 
-# Plain text output (for scripting)
-jira issue list --plain
+# CSV output (for scripting)
+acli jira workitem search --jql "project = PROJ" --csv
+
+# JSON output
+acli jira workitem search --jql "project = PROJ" --json
 
 # Filter by status, type, assignee
-jira issue list -s"In Progress" -tBug -a"john@example.com"
+acli jira workitem search --jql "project = PROJ AND status = 'In Progress' AND issuetype = Bug AND assignee = 'user@example.com'"
 
-# Filter by label (multiple labels with multiple -l flags)
-jira issue list -lurgent -lbackend
-
-# Unassigned issues
-jira issue list -ax
-
-# Issues NOT in a status (use ~ prefix)
-jira issue list -s~Done
+# Count results only
+acli jira workitem search --jql "project = PROJ" --count
 
 # Limit results
-jira issue list --paginate 20
+acli jira workitem search --jql "project = PROJ" --limit 20
 
 # Specific columns
-jira issue list --plain --columns key,status,assignee,summary
+acli jira workitem search --jql "project = PROJ" --fields "key,status,assignee,summary" --csv
 
-# Raw JQL query
-jira issue list -q"status = 'In Progress' AND assignee = currentUser()"
+# Paginate through all results
+acli jira workitem search --jql "project = PROJ" --paginate
+
+# Open search in browser
+acli jira workitem search --jql "project = PROJ" --web
+
+# Using a saved filter
+acli jira workitem search --filter 10001
 ```
 
 ## Creating Issues
 
 ```bash
-# Interactive mode (prompts for fields)
-jira issue create
+# Create with required fields
+acli jira workitem create -p PROJ -t Story -s "Summary" -d "Description"
 
-# Non-interactive with all fields
-jira issue create -tStory -s"Summary" -b"Description" -yHigh -a"user" -lfeature
+# With assignee and labels
+acli jira workitem create -p PROJ -t Task -s "Summary" -a "user@example.com" -l "feature,urgent"
 
-# With custom fields
-jira issue create -tStory -s"Summary" --custom story-points=3
-
-# Create in different project
-jira issue create -pOTHER -tTask -s"Summary"
+# Self-assign
+acli jira workitem create -p PROJ -t Bug -s "Summary" -a "@me"
 
 # Description from file
-jira issue create -tTask -s"Summary" --template /path/to/template.md
+acli jira workitem create -p PROJ -t Task -s "Summary" --description-file /path/to/desc.md
 
-# Description from stdin
-echo "Description" | jira issue create -tTask -s"Summary"
+# Create as subtask (with parent)
+acli jira workitem create -p PROJ -t Sub-task -s "Subtask" --parent KEY-1
+
+# Open editor for summary/description
+acli jira workitem create -p PROJ -t Task -e
+
+# JSON output
+acli jira workitem create -p PROJ -t Task -s "Summary" --json
 ```
 
 ## Viewing and Editing
 
 ```bash
 # View issue details
-jira issue view ISSUE-1
+acli jira workitem view KEY-1
 
-# View with comments
-jira issue view ISSUE-1 --comments 5
+# View in browser
+acli jira workitem view KEY-1 --web
 
-# Raw JSON output
-jira issue view ISSUE-1 --raw
+# JSON output
+acli jira workitem view KEY-1 --json
 
-# Edit issue (opens editor)
-jira issue edit ISSUE-1
+# View specific fields
+acli jira workitem view KEY-1 --fields "summary,status,comment"
 
-# Edit specific field
-jira issue edit ISSUE-1 -s"New summary"
+# View all fields
+acli jira workitem view KEY-1 --fields "*all"
+
+# Edit issue summary
+acli jira workitem edit -k KEY-1 -s "New summary"
+
+# Edit description
+acli jira workitem edit -k KEY-1 -d "New description"
+
+# Edit multiple issues with JQL
+acli jira workitem edit --jql "project = PROJ AND status = 'To Do'" -a "@me" -y
+
+# Remove assignee
+acli jira workitem edit -k KEY-1 --remove-assignee
 ```
 
 ## Transitions and Workflow
 
 ```bash
 # Move to new status
-jira issue move ISSUE-1 "In Progress"
-jira issue move ISSUE-1 Done
+acli jira workitem transition -k KEY-1 -s "In Progress"
+acli jira workitem transition -k KEY-1 -s "Done"
 
-# Move with comment
-jira issue move ISSUE-1 Done --comment "Completed implementation"
+# Transition multiple issues
+acli jira workitem transition -k "KEY-1,KEY-2" -s "Done"
 
-# Move and assign
-jira issue move ISSUE-1 "Code Review" -a"reviewer@example.com"
+# Transition with JQL (skip confirmation)
+acli jira workitem transition --jql "project = PROJ AND status = 'Code Review'" -s "Done" -y
+
+# Transition using filter
+acli jira workitem transition --filter 10001 -s "To Do" -y
 ```
 
-## Sprints and Epics
+## Comments
 
 ```bash
-# List sprints
-jira sprint list
+# Add comment
+acli jira workitem comment create -k KEY-1 -b "Comment text"
 
-# Add issue to sprint
-jira sprint add SPRINT-ID ISSUE-1
+# Comment from file
+acli jira workitem comment create -k KEY-1 -F /path/to/comment.txt
 
-# List epics
-jira epic list
+# Open editor for comment
+acli jira workitem comment create -k KEY-1 --editor
 
-# Add issue to epic
-jira epic add EPIC-1 ISSUE-1 ISSUE-2
+# Edit last comment
+acli jira workitem comment create -k KEY-1 --edit-last
 
-# Create epic
-jira epic create -s"Epic Summary" -b"Description"
+# List comments
+acli jira workitem comment list KEY-1
+
+# Comment on multiple issues
+acli jira workitem comment create --jql "project = PROJ AND status = 'Done'" -b "Closing batch"
+```
+
+## Sprints and Boards
+
+```bash
+# List boards
+acli jira board search
+
+# List sprints for a board
+acli jira board list-sprints --board-id BOARD_ID
+
+# View sprint details
+acli jira sprint view SPRINT_ID
+
+# List issues in sprint
+acli jira sprint list-workitems SPRINT_ID
+
+# Create sprint
+acli jira sprint create --board-id BOARD_ID --name "Sprint 1"
 ```
 
 ## Common JQL Patterns
 
 ```bash
 # My open issues
-jira issue list -q"assignee = currentUser() AND status != Done"
+acli jira workitem search --jql "assignee = currentUser() AND status != Done"
 
-# Recently updated
-jira issue list --updated -7d
-
-# Created this week
-jira issue list --created week
-
-# High priority bugs
-jira issue list -tBug -yHigh
+# Unassigned issues
+acli jira workitem search --jql "project = PROJ AND assignee IS EMPTY"
 
 # Issues in current sprint
-jira issue list -q"sprint in openSprints()"
+acli jira workitem search --jql "sprint in openSprints()"
+
+# High priority bugs
+acli jira workitem search --jql "issuetype = Bug AND priority = High"
+
+# Updated in last 7 days
+acli jira workitem search --jql "updated >= -7d"
+
+# Created this week
+acli jira workitem search --jql "created >= startOfWeek()"
+
+# Epics
+acli jira workitem search --jql "issuetype = Epic AND project = PROJ"
+
+# Issues in an epic
+acli jira workitem search --jql "'Epic Link' = KEY-1"
 ```
 
-## Configuration
-
-Config file: `~/.config/.jira/.config.yml`
+## Authentication
 
 ```bash
-# Initialize config
-jira init
+# Login
+acli jira auth login
 
-# Check current user
-jira me
+# Check status
+acli jira auth status
 
-# Server info
-jira serverinfo
+# Switch accounts
+acli jira auth switch
+
+# Logout
+acli jira auth logout
 ```
 
 ## Output Flags
 
-- `--plain` - Plain text output (for scripting/parsing)
-- `--no-headers` - Hide table headers (with --plain)
-- `--no-truncate` - Show all fields (with --plain)
-- `--raw` - JSON output
-- `--columns key,status,summary` - Specific columns only
+- `--csv` - CSV output (for scripting/parsing)
+- `--json` - JSON output
+- `--fields "key,status,summary"` - Specific columns only
+- `--web` or `-w` - Open in browser
+- `--count` - Count results only
+- `-y` or `--yes` - Skip confirmation prompts

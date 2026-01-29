@@ -32,7 +32,7 @@
       "Bash(gt sync:*)",
       "Bash(gt top:*)",
       "Bash(gt up:*)",
-      "Bash(jira:*)",
+      "Bash(acli:*)",
       "Bash(ls:*)",
       "Bash(npm:*)",
       "Bash(nx:*)",
