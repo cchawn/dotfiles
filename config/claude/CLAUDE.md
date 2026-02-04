@@ -19,6 +19,7 @@
 - Avoid "robust", "thorough", "comprehensive"
 - Prefer evergreen language, never use terms like "new", "improved", or "enhanced"
 - Never comment out code, delete it instead
+- When modifying documentation (README, configs), preserve existing formatting choices like emojis, headers, and styling unless explicitly asked to change them
 
 ## Workflow
 
@@ -28,9 +29,11 @@
 - After ANY correction from the user: update `tasks/lessons.md` with the pattern
 - Review lessons at session start for relevant project
 - When given a bug report: just fix it autonomously - identify logs, errors, failing tests, then resolve
+- When I interrupt or say "no", stop immediately and ask what approach I'd prefer before continuing
 
 ## Code Changes
 
+- Avoid over-engineering. Only make changes that are directly requested or clearly necessary. Keep solutions simple and focused.
 - Explore codebase for reusable functions before implementing - avoid duplication
 - Examine patterns in neighbouring files first
 - Check linting configs (`.eslintrc`, `.rubocop.yml`, `.editorconfig`) and follow them
@@ -50,6 +53,11 @@
 - Never mark a task complete without proving it works
 - Diff behaviour between main and your changes when relevant
 - Run tests, check logs, demonstrate correctness
+- Show explicit proof of completion (command output, test results) before claiming success
+
+## Best Practices
+
+- Before guessing file paths or URLs, search config files or use Glob/Grep to find the actual locations
 
 ## Git
 
