@@ -7,6 +7,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 This is a **dotfiles repository** that manages personal development environment configuration for macOS. The repository follows a clean structure separating configuration files by tool/application.
 
 ### Key Structure
+
 - `config/` - All configuration files organized by tool
 - `private/` - Private/sensitive configurations (e.g., work-specific settings)
 - `zsh/` - Shell configuration and scripts
@@ -15,6 +16,7 @@ This is a **dotfiles repository** that manages personal development environment 
 ## Common Development Commands
 
 ### Initial Setup
+
 ```bash
 # Install all dependencies
 brew bundle
@@ -28,14 +30,16 @@ brew bundle
 ```
 
 ### Version Management
+
 This setup uses **mise** (config at `config/mise/config.toml`) for managing tool versions:
+
 - Node.js (latest)
-- Python (latest) 
+- Python (latest)
 - Ruby (3.4)
 - Deno (latest)
-- Claude Code CLI (latest)
 
 ### Shell Environment
+
 - **Shell**: zsh with custom configuration
 - **Prompt**: Starship with custom Dracula theme (`config/starship.toml`)
 - **Terminal**: Ghostty with custom theming (`config/ghostty/config`)
@@ -44,6 +48,7 @@ This setup uses **mise** (config at `config/mise/config.toml`) for managing tool
 ## Configuration Architecture
 
 ### Tool Configuration Locations
+
 - **Starship prompt**: `config/starship.toml` - Custom Dracula theme with emojis and git status
 - **Ghostty terminal**: `config/ghostty/config` - WildCherry theme with custom keybindings
 - **Mise version manager**: `config/mise/config.toml` - Latest versions of development tools
@@ -54,8 +59,9 @@ This setup uses **mise** (config at `config/mise/config.toml`) for managing tool
 - **Private configs**: `private/work.zsh` for work-specific settings
 
 ### Custom Features
+
 - **Starship theme**: Custom Dracula palette with emoji-rich git status indicators
-- **Ghostty keybindings**: 
+- **Ghostty keybindings**:
   - `cmd+d` / `cmd+shift+d` for pane splitting
   - `cmd+plus/minus/0` for font size control
 - **Shell integration**: Full zsh integration with cursor, sudo, and title features
@@ -63,8 +69,9 @@ This setup uses **mise** (config at `config/mise/config.toml`) for managing tool
 ## Development Notes
 
 This is a **configuration-only repository** - no building, testing, or compilation required. Changes take effect through:
+
 - Shell restart for zsh/starship changes
-- Terminal restart for ghostty changes  
+- Terminal restart for ghostty changes
 - `mise install` for version changes
 
 The setup is designed for macOS with Homebrew and assumes FiraCode Nerd Font for proper icon display in the terminal prompt.

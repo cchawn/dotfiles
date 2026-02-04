@@ -79,6 +79,20 @@ main() {
     # Mise version manager
     create_symlink "$DOTFILES_DIR/config/mise/config.toml" "$HOME/.config/mise/config.toml"
 
+    # Claude Code CLI
+    if ! command -v claude &> /dev/null; then
+        read -p "🤖 Install Claude Code CLI? [y/N] " -n 1 -r
+        echo
+        if [[ $REPLY =~ ^[Yy]$ ]]; then
+            log "Installing Claude Code CLI..."
+            curl -fsSL https://claude.ai/install.sh | bash
+        else
+            log "Skipping Claude Code CLI installation"
+        fi
+    else
+        log "Claude Code CLI already installed"
+    fi
+
     # Zed editor
     create_symlink "$DOTFILES_DIR/config/zed/settings.json" "$HOME/.config/zed/settings.json"
 
