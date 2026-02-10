@@ -1,9 +1,10 @@
 # macOS
 .DS_Store
 
-# VS Code
+# Editors
 .vscode/*
 .vsls.json
+.zed/*
 
 # log files
 *.*log
