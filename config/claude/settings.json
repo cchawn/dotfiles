@@ -46,7 +46,11 @@
       "mcp__datadog__*"
     ]
   },
-  "model": "opus",
+  "model": "opus[1m]",
+  "statusLine": {
+    "type": "command",
+    "command": "bash ~/.claude/statusline.sh"
+  },
   "enabledPlugins": {
     "graphite@ws-claude-marketplace": true,
     "context7@claude-plugins-official": true,
@@ -54,9 +58,5 @@
     "ralph-loop@claude-plugins-official": true,
     "superpowers@claude-plugins-official": true
   },
-  "gitAttribution": false,
-  "statusLine": {
-    "type": "command",
-    "command": "bash ~/.claude/statusline.sh"
-  }
+  "gitAttribution": false
 }
