@@ -3,7 +3,7 @@
 ## Tools & Environment
 
 - Use `gh` CLI for GitHub (authenticated access)
-- Use MCP tools directly for Datadog, Notion, Jira — don't fall back to Bash/curl
+- Use MCP tools directly for Datadog and Notion — don't fall back to Bash/curl
 - Use `sentry-cli` skill for Sentry issues (`*.sentry.io/issues/*`)
 - Use `jira-cli` skill for Jira tickets (`*.atlassian.net/browse/*`)
 - Use Notion MCP for Notion documents (`*.notion.so/*`)
