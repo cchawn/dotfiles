@@ -6,6 +6,7 @@
 - Use MCP tools directly for Datadog and Notion — don't fall back to Bash/curl
 - Use `sentry-cli` skill for Sentry issues (`*.sentry.io/issues/*`)
 - Use `jira-cli` skill for Jira tickets (`*.atlassian.net/browse/*`)
+- Use `gh-pr` skill when creating pull requests on GitHub
 - Use Notion MCP for Notion documents (`*.notion.so/*`)
 - Detect package manager: `pnpm-lock.yaml` → pnpm, `yarn.lock` → yarn, `package-lock.json` → npm, `deno.lock` → deno
 - Prefer simple git commands without `-C` flag when already in the working directory
