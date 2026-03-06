@@ -13,17 +13,12 @@ Run these checks before creating the PR. Abort and inform the user if any fail.
 
 ```bash
 # 1. Must be on a feature branch (not main/master)
-branch=$(git branch --show-current)
-if [ "$branch" = "main" ] || [ "$branch" = "master" ]; then
-  echo "ERROR: Cannot create PR from $branch. Switch to a feature branch first."
-  exit 1
-fi
+# Use git branch --show-current to check the branch name
+# Abort if on main or master
 
 # 2. All commits must be pushed to remote
-if [ -n "$(git log origin/$branch..$branch 2>/dev/null)" ]; then
-  echo "Unpushed commits detected. Pushing..."
-  git push -u origin "$branch"
-fi
+# Compare local branch with its remote tracking branch
+# Push with -u if unpushed commits exist
 ```
 
 ## Detecting a PR Template
@@ -80,10 +75,8 @@ Infer the Jira base URL from `git remote get-url origin` or prior context. If un
 git log main..HEAD --oneline          # commits on this branch
 git diff main..HEAD --stat            # files changed
 
-# Create draft PR using heredoc for the body
-gh pr create --draft \
-  --title "<concise title under 70 chars>" \
-  --body "$(cat <<'EOF'
+# Write the PR body to a temp file
+cat <<'EOF' > /tmp/pr-body.md
 ## Why
 
 <motivation>
@@ -96,7 +89,11 @@ gh pr create --draft \
 
 <verification>
 EOF
-)"
+
+# Create draft PR using the body file
+gh pr create --draft \
+  --title "<concise title under 70 chars>" \
+  --body-file /tmp/pr-body.md
 ```
 
 ### Key Rules
