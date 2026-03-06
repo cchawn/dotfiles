@@ -1,6 +1,6 @@
 ---
 name: jira-cli
-description: Use when working with Jira issues, sprints, or epics from the command line. Covers listing, creating, viewing, and transitioning issues.
+description: Manages Jira issues, sprints, and epics via the Atlassian CLI. Covers listing, creating, viewing, transitioning, and commenting on issues. Use when working with Jira tickets or URLs containing atlassian.net.
 ---
 
 # Atlassian CLI (acli jira)
@@ -115,70 +115,9 @@ acli jira workitem edit -k KEY-1 --remove-assignee
 
 ## Rich Text Descriptions (ADF)
 
-Jira Cloud uses Atlassian Document Format (ADF) for rich text. The `-d` flag and `--description-file`
-treat input as **plain text** — markdown, wiki markup, and HTML will render as literal strings.
+The `-d` flag and `--description-file` treat input as **plain text** — markdown, wiki markup, and HTML render as literal strings.
 
-To set a formatted description, use `--from-json` with a JSON file in this structure:
-
-```json
-{
-  "issues": ["KEY-1"],
-  "description": {
-    "version": 1,
-    "type": "doc",
-    "content": [
-      {
-        "type": "heading",
-        "attrs": { "level": 2 },
-        "content": [{ "type": "text", "text": "Section Title" }]
-      },
-      {
-        "type": "paragraph",
-        "content": [
-          { "type": "text", "text": "Regular text, " },
-          { "type": "text", "text": "bold text", "marks": [{ "type": "strong" }] },
-          { "type": "text", "text": ", " },
-          { "type": "text", "text": "italic text", "marks": [{ "type": "em" }] },
-          { "type": "text", "text": ", and " },
-          { "type": "text", "text": "inline code", "marks": [{ "type": "code" }] }
-        ]
-      },
-      {
-        "type": "paragraph",
-        "content": [
-          { "type": "text", "text": "a link", "marks": [{ "type": "link", "attrs": { "href": "https://example.com" } }] }
-        ]
-      },
-      {
-        "type": "bulletList",
-        "content": [
-          {
-            "type": "listItem",
-            "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "Bullet item" }] }]
-          }
-        ]
-      },
-      {
-        "type": "orderedList",
-        "attrs": { "order": 1 },
-        "content": [
-          {
-            "type": "listItem",
-            "content": [{ "type": "paragraph", "content": [{ "type": "text", "text": "Numbered item" }] }]
-          }
-        ]
-      }
-    ]
-  }
-}
-```
-
-**Key gotchas:**
-- `--from-json` and `-k` cannot be used together — put issue keys in the `"issues"` array
-- `--from-json` prompts for confirmation — add `-y` to skip
-- Generate a template with `acli jira workitem edit --generate-json`
-- ADF node types: `heading`, `paragraph`, `bulletList`, `orderedList`, `listItem`, `codeBlock`, `table`
-- Text marks: `strong`, `em`, `code`, `link` (with `attrs.href`), `strike`, `underline`
+For formatted descriptions, use `--from-json`. See [ADF.md](ADF.md) for the JSON structure, node types, and gotchas.
 
 ## Transitions and Workflow
 

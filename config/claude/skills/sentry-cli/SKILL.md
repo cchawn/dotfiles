@@ -1,6 +1,6 @@
 ---
 name: sentry-cli
-description: Use when pulling issue or event information from Sentry, bulk managing issues (mute, resolve), or checking Sentry configuration from the command line.
+description: Pulls issue and event information from Sentry, bulk manages issues (mute, resolve), and checks Sentry configuration. Use when working with Sentry issues, events, or URLs containing sentry.io.
 ---
 
 # Sentry CLI - Issue Management

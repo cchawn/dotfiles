@@ -1,6 +1,6 @@
 ---
 name: gh-pr
-description: Use when creating a pull request on GitHub. Covers pre-flight checks, pushing commits, opening a draft PR with a structured body, and watching CI to fix failures.
+description: Creates pull requests on GitHub via the gh CLI. Covers pre-flight checks, pushing commits, opening a draft PR with a structured body, and watching CI to fix failures. Use when opening or submitting a pull request.
 ---
 
 # GitHub Pull Request (`gh pr create`)
