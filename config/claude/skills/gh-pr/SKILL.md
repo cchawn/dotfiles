@@ -1,6 +1,6 @@
 ---
 name: gh-pr
-description: Use when creating a pull request on GitHub. Covers pre-flight checks, pushing commits, and opening a draft PR with a structured body.
+description: Use when creating a pull request on GitHub. Covers pre-flight checks, pushing commits, opening a draft PR with a structured body, and watching CI to fix failures.
 ---
 
 # GitHub Pull Request (`gh pr create`)
@@ -107,6 +107,37 @@ EOF
 - After creation, output the PR URL so the user can review it
 - If `gh pr create` fails due to auth, suggest `gh auth login`
 
+## Watch CI and Fix Failures
+
+After the PR is created, watch for CI failures and iterate until checks pass.
+
+```bash
+# Watch the CI run in real time (exits when complete)
+gh pr checks --watch
+
+# If any checks fail, inspect the logs
+gh run view <run-id> --log-failed
+```
+
+### Iteration Loop
+
+1. Run `gh pr checks --watch` to wait for CI results
+2. If all checks pass, report success and stop
+3. If any checks fail:
+   a. Identify the failed run with `gh pr checks`
+   b. Inspect logs with `gh run view <run-id> --log-failed`
+   c. Diagnose the root cause from the log output
+   d. Fix the code locally
+   e. Commit and push the fix (`git push`)
+   f. Go back to step 1
+
+### Key Rules
+
+- Limit to **3 iterations** — if CI still fails after 3 fix attempts, stop and ask the user for guidance
+- Each fix commit should use semantic format: `fix: resolve CI failure in <area>`
+- Do not blindly retry without a code change — always diagnose before fixing
+- If a failure is flaky (passes on re-run without changes), note it to the user rather than making unnecessary code changes
+
 ## Quick Reference
 
 | Action | Command |
@@ -118,3 +149,5 @@ EOF
 | Add labels | `gh pr create --draft --label bug,urgent` |
 | View open PRs | `gh pr list` |
 | View PR in browser | `gh pr view --web` |
+| Watch CI checks | `gh pr checks --watch` |
+| View failed run logs | `gh run view <run-id> --log-failed` |
