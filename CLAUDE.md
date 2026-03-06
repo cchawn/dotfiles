@@ -8,9 +8,14 @@ This is a **dotfiles repository** that manages personal development environment 
 
 ### Key Structure
 
-- `config/` - All configuration files organized by tool
+- `claude/` - Claude Code CLI configuration
+- `ghostty/` - Ghostty terminal configuration
+- `git/` - Git configuration files
+- `mise/` - Mise version manager configuration
 - `private/` - Private/sensitive configurations (e.g., work-specific settings)
+- `zed/` - Zed editor configuration
 - `zsh/` - Shell configuration and scripts
+- `starship/` - Starship prompt configuration
 - `Brewfile` - Homebrew dependencies for the entire setup
 
 ## Common Development Commands
@@ -31,7 +36,7 @@ brew bundle
 
 ### Version Management
 
-This setup uses **mise** (config at `config/mise/config.toml`) for managing tool versions:
+This setup uses **mise** (config at `mise/config.toml`) for managing tool versions:
 
 - Node.js (latest)
 - Python (latest)
@@ -41,21 +46,21 @@ This setup uses **mise** (config at `config/mise/config.toml`) for managing tool
 ### Shell Environment
 
 - **Shell**: zsh with custom configuration
-- **Prompt**: Starship with custom Dracula theme (`config/starship.toml`)
-- **Terminal**: Ghostty with custom theming (`config/ghostty/config`)
+- **Prompt**: Starship with custom Dracula theme (`starship/starship.toml`)
+- **Terminal**: Ghostty with custom theming (`ghostty/config`)
 - **Environment**: direnv for auto-loading project environments
 
 ## Configuration Architecture
 
 ### Tool Configuration Locations
 
-- **Starship prompt**: `config/starship.toml` - Custom Dracula theme with emojis and git status
-- **Ghostty terminal**: `config/ghostty/config` - WildCherry theme with custom keybindings
-- **Mise version manager**: `config/mise/config.toml` - Latest versions of development tools
+- **Starship prompt**: `starship/starship.toml` - Custom Dracula theme with emojis and git status
+- **Ghostty terminal**: `ghostty/config` - WildCherry theme with custom keybindings
+- **Mise version manager**: `mise/config.toml` - Latest versions of development tools
 - **Git**:
-  - Main config: `config/git/.gitconfig` - Shared git settings and aliases
+  - Main config: `git/.gitconfig` - Shared git settings and aliases
   - User config: `private/git/user.gitconfig` - Personal info (name, email, signing key)
-  - Template: `config/git/user.gitconfig.template` - Template for new setups
+  - Template: `git/user.gitconfig.template` - Template for new setups
 - **Private configs**: `private/work.zsh` for work-specific settings
 
 ### Custom Features

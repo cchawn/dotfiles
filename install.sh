@@ -51,18 +51,18 @@ main() {
     create_symlink "$DOTFILES_DIR/zsh/.zshrc" "$HOME/.zshrc"
     
     # Git configuration
-    create_symlink "$DOTFILES_DIR/config/git/.gitconfig" "$HOME/.gitconfig"
-    create_symlink "$DOTFILES_DIR/config/git/.gitignore_global" "$HOME/.gitignore_global"
+    create_symlink "$DOTFILES_DIR/git/.gitconfig" "$HOME/.gitconfig"
+    create_symlink "$DOTFILES_DIR/git/.gitignore_global" "$HOME/.gitignore_global"
 
     # Git user configuration (personal info)
     if [[ ! -f "$DOTFILES_DIR/private/git/user.gitconfig" ]]; then
         log "Creating user git config from template..."
         mkdir -p "$DOTFILES_DIR/private/git"
-        if [[ -f "$DOTFILES_DIR/config/git/user.gitconfig.template" ]]; then
-            cp "$DOTFILES_DIR/config/git/user.gitconfig.template" "$DOTFILES_DIR/private/git/user.gitconfig"
+        if [[ -f "$DOTFILES_DIR/git/user.gitconfig.template" ]]; then
+            cp "$DOTFILES_DIR/git/user.gitconfig.template" "$DOTFILES_DIR/private/git/user.gitconfig"
             echo "⚠️  Please edit $DOTFILES_DIR/private/git/user.gitconfig with your git user details"
         else
-            error "Template file not found at $DOTFILES_DIR/config/git/user.gitconfig.template"
+            error "Template file not found at $DOTFILES_DIR/git/user.gitconfig.template"
         fi
     fi
 
@@ -71,13 +71,13 @@ main() {
     fi
     
     # Starship prompt
-    create_symlink "$DOTFILES_DIR/config/starship.toml" "$HOME/.config/starship.toml"
-    
+    create_symlink "$DOTFILES_DIR/starship/starship.toml" "$HOME/.config/starship.toml"
+
     # Ghostty terminal
-    create_symlink "$DOTFILES_DIR/config/ghostty/config" "$HOME/.config/ghostty/config"
-    
+    create_symlink "$DOTFILES_DIR/ghostty/config" "$HOME/.config/ghostty/config"
+
     # Mise version manager
-    create_symlink "$DOTFILES_DIR/config/mise/config.toml" "$HOME/.config/mise/config.toml"
+    create_symlink "$DOTFILES_DIR/mise/config.toml" "$HOME/.config/mise/config.toml"
 
     # Claude Code CLI
     if ! command -v claude &> /dev/null; then
@@ -94,11 +94,11 @@ main() {
     fi
 
     # Zed editor
-    create_symlink "$DOTFILES_DIR/config/zed/settings.json" "$HOME/.config/zed/settings.json"
+    create_symlink "$DOTFILES_DIR/zed/settings.json" "$HOME/.config/zed/settings.json"
 
     # Claude Code configuration (if it exists)
-    if [[ -f "$DOTFILES_DIR/config/claude/CLAUDE.md" ]]; then
-        create_symlink "$DOTFILES_DIR/config/claude" "$HOME/.claude"
+    if [[ -f "$DOTFILES_DIR/claude/CLAUDE.md" ]]; then
+        create_symlink "$DOTFILES_DIR/claude" "$HOME/.claude"
     fi
     
     # Source private configurations if they exist
