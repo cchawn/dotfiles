@@ -24,17 +24,15 @@ Run these checks before creating the PR. Abort and inform the user if any fail.
 ## Detecting a PR Template
 
 ```bash
-# Check for a repository PR template
-template=""
-for f in .github/PULL_REQUEST_TEMPLATE.md .github/pull_request_template.md docs/pull_request_template.md PULL_REQUEST_TEMPLATE.md; do
-  if [ -f "$f" ]; then
-    template="$f"
-    break
-  fi
-done
+# Check for a repository PR template via the GitHub API
+# First get the repo name, then fetch templates
+repo=$(gh repo view --json nameWithOwner --jq '.nameWithOwner')
+gh repo view "$repo" --json pullRequestTemplates
 ```
 
-If a template exists, read it and fill in the sections. If no template exists, use the default structure below.
+The response is an array of `{ "body": "...", "filename": "..." }` objects. Use the `body` of the first entry as the template. If the array is empty, use the default structure below.
+
+If a template exists, fill in its sections. If no template exists, use the default structure below.
 
 ## PR Body Structure
 
