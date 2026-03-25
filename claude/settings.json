@@ -46,17 +46,19 @@
       "mcp__datadog__*"
     ]
   },
-  "model": "opus[1m]",
+  "model": "sonnet[1m]",
   "statusLine": {
     "type": "command",
     "command": "bash ~/.claude/statusline.sh"
   },
   "enabledPlugins": {
-    "graphite@ws-claude-marketplace": true,
-    "context7@claude-plugins-official": true,
     "code-review@claude-plugins-official": true,
-    "ralph-loop@claude-plugins-official": true,
-    "superpowers@claude-plugins-official": true
+    "context7@claude-plugins-official": true,
+    "graphite@ws-claude-marketplace": true,
+    "ruby-lsp@claude-plugins-official": true,
+    "superpowers@ws-claude-marketplace": true,
+    "devcontainer-setup@ws-claude-marketplace": true,
+    "incident-command@ws-claude-marketplace": true
   },
   "gitAttribution": false
 }

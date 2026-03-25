@@ -7,24 +7,25 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "remove_trailing_whitespace_on_save": false,
   "agent": {
     "default_model": {
       "provider": "anthropic",
-      "model": "claude-sonnet-4-5-latest"
+      "model": "claude-sonnet-4-5-latest",
     },
-    "model_parameters": []
+    "model_parameters": [],
   },
   "agent_servers": {
     "your_agent": {
       "type": "custom",
       "command": "path_to_executable",
       "args": [],
-      "env": {}
-    }
+      "env": {},
+    },
   },
   "show_edit_predictions": false,
   "minimap": {
-    "show": "auto"
+    "show": "auto",
   },
   "inlay_hints": {
     "enabled": true,
@@ -40,43 +41,50 @@
       "alt": false,
       "shift": false,
       "platform": false,
-      "function": false
-    }
+      "function": false,
+    },
   },
   "buffer_font_family": "FiraCode Nerd Font Mono",
   "buffer_font_features": {
-    "calt": 1
+    "calt": 1,
   },
   "ui_font_family": "FiraCode Nerd Font Mono",
   "ui_font_features": {
-    "calt": 1
+    "calt": 1,
   },
   "telemetry": {
     "diagnostics": false,
-    "metrics": false
+    "metrics": false,
   },
   "icon_theme": {
     "mode": "dark",
     "light": "Zed (Default)",
-    "dark": "Catppuccin Macchiato"
+    "dark": "Catppuccin Macchiato",
   },
   "ui_font_size": 14,
   "buffer_font_size": 14,
   "theme": {
     "mode": "dark",
     "light": "Catppuccin Macchiato",
-    "dark": "Catppuccin Macchiato"
+    "dark": "Catppuccin Macchiato",
   },
-  "format_on_save": "on",
+  "format_on_save": "off",
+  "languages": {
+    "Dockerfile": {
+      "auto_indent": "preserve_indent",
+      "tab_size": 4,
+      "format_on_save": "off",
+    },
+  },
   "autosave": "on_focus_change",
   "tab_size": 2,
   "hard_tabs": false,
   "git": {
     "inline_blame": {
-      "enabled": true
-    }
+      "enabled": true,
+    },
   },
   "preferred_line_length": 100,
   "show_wrap_guides": true,
-  "use_system_window_tabs": true
+  "use_system_window_tabs": true,
 }
