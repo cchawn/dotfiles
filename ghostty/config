@@ -71,3 +71,5 @@ confirm-close-surface = false
 # Shell Integration
 shell-integration = zsh
 shell-integration-features = cursor,sudo,title
+
+keyboard-protocol = xterm
