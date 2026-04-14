@@ -46,7 +46,7 @@
       "mcp__datadog__*"
     ]
   },
-  "model": "sonnet[1m]",
+  "model": "opus[1m]",
   "statusLine": {
     "type": "command",
     "command": "bash ~/.claude/statusline.sh"
@@ -58,7 +58,22 @@
     "ruby-lsp@claude-plugins-official": true,
     "superpowers@ws-claude-marketplace": true,
     "devcontainer-setup@ws-claude-marketplace": true,
-    "incident-command@ws-claude-marketplace": true
+    "incident-command@ws-claude-marketplace": true,
+    "betting@ws-claude-marketplace": true
   },
-  "gitAttribution": false
+  "gitAttribution": false,
+  "skipDangerousModePermissionPrompt": true,
+  "hooks": {
+    "Notification": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "afplay /System/Library/Sounds/Frog.aiff"
+          }
+        ]
+      }
+    ]
+  }
 }
