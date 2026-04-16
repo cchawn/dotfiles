@@ -62,18 +62,5 @@
     "betting@ws-claude-marketplace": true
   },
   "gitAttribution": false,
-  "skipDangerousModePermissionPrompt": true,
-  "hooks": {
-    "Notification": [
-      {
-        "matcher": "",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "afplay /System/Library/Sounds/Frog.aiff"
-          }
-        ]
-      }
-    ]
-  }
+  "skipDangerousModePermissionPrompt": true
 }
