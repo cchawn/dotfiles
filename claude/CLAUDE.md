@@ -3,23 +3,15 @@
 ## Tools & Environment
 
 - Use `gh` CLI for GitHub (authenticated access)
-- Use MCP tools directly for Datadog and Notion — don't fall back to Bash/curl
 - Use `sentry-cli` skill for Sentry issues (`*.sentry.io/issues/*`)
 - Use `jira-cli` skill for Jira tickets (`*.atlassian.net/browse/*`)
 - Use `gh-pr` skill when creating pull requests on GitHub
 - Use Notion MCP for Notion documents (`*.notion.so/*`)
-- Detect package manager: `pnpm-lock.yaml` → pnpm, `yarn.lock` → yarn, `package-lock.json` → npm, `deno.lock` → deno
+- Detect JS/TS package manager: `pnpm-lock.yaml` → pnpm, `yarn.lock` → yarn, `package-lock.json` → npm, `deno.lock` → deno
 - Prefer simple git commands without `-C` flag when already in the working directory
-- Use subagents and worktrees liberally to keep main conversation focused
-- Offload research, exploration, and parallel work to subagents — one task per subagent
-- Use a subagent to review plans as a staff engineer before implementation
 - Primary languages and ecosystems: TypeScript, Ruby, YAML (Helm/K8s)
 - Use `jq` for JSON processing in Bash, not Python
-
-## General Principles
-
-- Before making changes: 1) Check available tools/MCPs, 2) Read relevant config files, 3) State plan and wait for confirmation on non-trivial changes
-- IMPORTANT: When I interrupt or say "no", stop immediately and ask what approach I'd prefer
+- Use `yamllint` for YAML validation in Bash, not Python
 
 ## Style
 
@@ -27,24 +19,18 @@
 - Avoid "robust", "thorough", "comprehensive"
 - Prefer evergreen language, never use "new", "improved", or "enhanced"
 - Never comment out code, delete it instead
-- When modifying documentation, preserve existing formatting choices (emojis, headers, styling) unless explicitly asked to change
+- When modifying documentation, preserve existing formatting choices (emojis, headers, styling)
 
 ## Workflow
 
 - Enter plan mode for ANY non-trivial task (3+ steps or architectural decisions)
 - Break work into phases: Phase 1: investigation → Phase 2: implementation → Phase 3: commit and PR. Summarize after each phase.
-- Write detailed specs upfront to reduce ambiguity
-- Track tasks in `tasks/todo.md` with checkable items; mark complete as you go
-- After ANY correction from me: update `tasks/lessons.md` with the pattern
-- Review lessons at session start for relevant project
 - When given a bug report: fix it autonomously — identify logs, errors, failing tests, then resolve
-
-<!-- TODO: bug report handling and phase-based workflow could become skills (loaded on-demand instead of every session) -->
 
 ## Code Changes
 
 - Code style priority: (1) Consistency with file, (2) Readability, (3) Performance, (4) Concise
-- Stop and confirm before: architectural changes, multiple valid approaches, shared code/API changes, rewrites
+- Stop and confirm before: architectural changes, multiple valid approaches, shared code/API changes, full rewrites
 
 ## Testing & Verification
 
@@ -52,12 +38,11 @@
 - Never write tests that only test mocked behaviour
 - Test output must be clean (no ignored warnings/errors)
 - IMPORTANT: Never mark a task complete without proving it works — show explicit proof of completion (command output, test results)
-- Diff behaviour between main and your changes when relevant
 
 ## Git
 
-- Semantic commits: `fix:`, `feat:`, `chore:` prefix, under 80 chars
-- Use `--force-with-lease` not `--force`
+- Use semantic commits: `fix:`, `feat:`, `chore:` prefix, keep the message under 80 chars
+- Use `--force-with-lease`, never `--force`
 - Never add AI as coauthor
 - 1Password/GPG signing may cause transient commit failures — retry once if signing fails
 
@@ -68,10 +53,11 @@ Check `git remote get-url origin`:
 - **Work**: URL does NOT contain "cchawn"
 - **Personal**: URL contains "cchawn"
 
-## IMPORTANT: Forbidden
+## IMPORTANT: Forbidden Actions
 
-- `--no-verify` to bypass hooks
-- Direct commits to main/master
-- Rewriting pushed history without coordination
-- Changes unrelated to assigned task
-- Committing secrets or credentials
+- Never use `--no-verify` to bypass hooks
+- Never commit directly to main/master
+- Never rewrite pushed history without coordination
+- Never make changes unrelated to assigned task
+- Never commit secrets or credentials
+- Never reply to comments in GitHub on my behalf
