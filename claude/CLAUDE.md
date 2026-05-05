@@ -4,7 +4,6 @@
 
 - Use `gh` CLI for GitHub (authenticated access)
 - Use `sentry-cli` skill for Sentry issues (`*.sentry.io/issues/*`)
-- Use `jira-cli` skill for Jira tickets (`*.atlassian.net/browse/*`)
 - Use `gh-pr` skill when creating pull requests on GitHub
 - Use Notion MCP for Notion documents (`*.notion.so/*`)
 - Detect JS/TS package manager: `pnpm-lock.yaml` → pnpm, `yarn.lock` → yarn, `package-lock.json` → npm, `deno.lock` → deno
@@ -31,6 +30,7 @@
 
 - Code style priority: (1) Consistency with file, (2) Readability, (3) Performance, (4) Concise
 - Stop and confirm before: architectural changes, multiple valid approaches, shared code/API changes, full rewrites
+- Keep database migrations in separate PRs — never bundle them with code changes
 
 ## Testing & Verification
 
