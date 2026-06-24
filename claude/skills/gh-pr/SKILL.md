@@ -13,13 +13,13 @@ Run these checks before creating the PR. Abort and inform the user if any fail.
 
 ```bash
 # 1. Must be on a feature branch (not main/master)
-# Use git branch --show-current to check the branch name
-# Abort if on main or master
+git branch --show-current
 
 # 2. All commits must be pushed to remote
 # Compare local branch with its remote tracking branch
 # Push with -u if unpushed commits exist
 ```
+
 
 ## Detecting a PR Template
 
@@ -32,24 +32,24 @@ gh repo view "$repo" --json pullRequestTemplates
 
 The response is an array of `{ "body": "...", "filename": "..." }` objects. Use the `body` of the first entry as the template. If the array is empty, use the default structure below.
 
-If a template exists, fill in its sections. If no template exists, use the default structure below.
+The PR body must be short. Aim for 3–5 sentences total across all sections. Omit any section that would just repeat what the diff already shows. Reviewers read diffs — the body explains context and intent, not mechanics.
 
 ## PR Body Structure
 
-Always use `##` (H2) headings. The body must include these sections:
+Always use `##` (H2) headings. Include only sections with non-obvious content:
 
 ```markdown
 ## Why
 
-<Brief explanation of the motivation — what problem does this solve or what goal does it achieve?>
+<One or two sentences — what problem this solves or what goal it achieves. Skip if obvious from the title.>
 
 ## What Changed
 
-<Concise summary of the changes — list key modifications, additions, or removals>
+<Only include if the diff is non-obvious — e.g. a workaround, a subtle invariant, or a non-mechanical rename. Omit entirely if the diff speaks for itself.>
 
 ## How I Tested
 
-<Describe how the changes were verified — commands run, test results, manual checks>
+<Short list or one sentence — the key commands or checks that confirmed it works.>
 ```
 
 ### Adding a Jira Ticket Link
