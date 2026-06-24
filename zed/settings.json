@@ -24,8 +24,10 @@
   "agent": {
     "dock": "right",
     "default_model": {
-      "provider": "anthropic",
-      "model": "claude-sonnet-4-5-latest",
+      "effort": "high",
+      "enable_thinking": true,
+      "provider": "amazon-bedrock",
+      "model": "claude-sonnet-4-6",
     },
     "model_parameters": [],
   },
@@ -101,4 +103,11 @@
   "preferred_line_length": 100,
   "show_wrap_guides": true,
   "use_system_window_tabs": true,
+  "language_models": {
+    "bedrock": {
+      "profile": "zed",
+      "authentication_method": "named_profile",
+      "region": "us-east-1"
+    }
+  },
 }
