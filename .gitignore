@@ -26,6 +26,7 @@ mise.local.toml
 !**/claude/settings.json
 !**/claude/statusline.sh
 !**/claude/hooks
+**/claude/hooks/herdr-*
 
 # log files
 *.*log
