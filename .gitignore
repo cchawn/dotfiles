@@ -25,6 +25,7 @@ mise.local.toml
 !**/claude/CLAUDE.md
 !**/claude/settings.json
 !**/claude/statusline.sh
+!**/claude/hooks
 
 # log files
 *.*log

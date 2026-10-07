@@ -79,21 +79,47 @@
     ],
     "defaultMode": "auto"
   },
-  "model": "sonnet[1m]",
+  "model": "opus",
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash '/Users/cchan/.claude/hooks/herdr-agent-state.sh' session",
+            "timeout": 10
+          }
+        ]
+      }
+    ]
+  },
   "statusLine": {
     "type": "command",
     "command": "bash ~/.claude/statusline.sh"
   },
   "enabledPlugins": {
     "betting@ws-claude-marketplace": true,
+    "caveman@caveman": true,
     "context7@claude-plugins-official": true,
-    "devcontainer-setup@ws-claude-marketplace": true,
-    "graphite@ws-claude-marketplace": true,
+    "crit@crit": true,
     "incident-command@ws-claude-marketplace": true,
     "ruby-lsp@claude-plugins-official": true,
-    "superpowers@ws-claude-marketplace": false
+    "compass-utils@ws-claude-marketplace": true
   },
   "extraKnownMarketplaces": {
+    "caveman": {
+      "source": {
+        "source": "github",
+        "repo": "JuliusBrussee/caveman"
+      }
+    },
+    "crit": {
+      "source": {
+        "source": "github",
+        "repo": "tomasz-tomczyk/crit"
+      }
+    },
     "ws-claude-marketplace": {
       "source": {
         "source": "git",
@@ -102,6 +128,15 @@
     }
   },
   "effortLevel": "low",
+  "modelSettings": {
+    "claude-opus-5-5": {
+      "effortLevel": "high"
+    },
+    "claude-sonnet-5": {
+      "effortLevel": "medium"
+    }
+  },
+  "tui": "fullscreen",
   "skipDangerousModePermissionPrompt": true,
   "theme": "dark",
   "skipAutoPermissionPrompt": true,
