@@ -9,32 +9,14 @@ Uses the `gh` CLI to open a draft pull request with a structured description.
 
 ## Pre-flight Checks
 
-Run these checks before creating the PR. Abort and inform the user if any fail.
+Before creating the PR:
 
-```bash
-# 1. Must be on a feature branch (not main/master)
-git branch --show-current
-
-# 2. All commits must be pushed to remote
-# Compare local branch with its remote tracking branch
-# Push with -u if unpushed commits exist
-```
-
-
-## Detecting a PR Template
-
-```bash
-# Check for a repository PR template via the GitHub API
-# First get the repo name, then fetch templates
-repo=$(gh repo view --json nameWithOwner --jq '.nameWithOwner')
-gh repo view "$repo" --json pullRequestTemplates
-```
-
-The response is an array of `{ "body": "...", "filename": "..." }` objects. Use the `body` of the first entry as the template. If the array is empty, use the default structure below.
-
-The PR body must be short. Aim for 3–5 sentences total across all sections. Omit any section that would just repeat what the diff already shows. Reviewers read diffs — the body explains context and intent, not mechanics.
+- If `git branch --show-current` is `main` or `master`, abort and tell the user.
+- If the branch has commits its remote tracking branch lacks, push them (with `-u` if no upstream is set).
 
 ## PR Body Structure
+
+The PR body must be short. Aim for 3–5 sentences total across all sections. Omit any section that would just repeat what the diff already shows. Human reviewers read diffs — the body explains context and intent, not mechanics.
 
 Always use `##` (H2) headings. Include only sections with non-obvious content:
 
@@ -45,11 +27,11 @@ Always use `##` (H2) headings. Include only sections with non-obvious content:
 
 ## What Changed
 
-<Only include if the diff is non-obvious — e.g. a workaround, a subtle invariant, or a non-mechanical rename. Omit entirely if the diff speaks for itself.>
+<Short, bullet point list. Only include if the diff is non-obvious — e.g. a workaround, a subtle invariant, or a non-mechanical rename. Omit entirely if the diff speaks for itself.>
 
 ## How I Tested
 
-<Short list or one sentence — the key commands or checks that confirmed it works.>
+<Short bullet point list or one sentence — the key commands or checks that confirmed it works.>
 ```
 
 ### Adding a Jira Ticket Link
@@ -114,35 +96,9 @@ gh pr checks --watch
 gh run view <run-id> --log-failed
 ```
 
-### Iteration Loop
-
-1. Run `gh pr checks --watch` to wait for CI results
-2. If all checks pass, report success and stop
-3. If any checks fail:
-   a. Identify the failed run with `gh pr checks`
-   b. Inspect logs with `gh run view <run-id> --log-failed`
-   c. Diagnose the root cause from the log output
-   d. Fix the code locally
-   e. Commit and push the fix (`git push`)
-   f. Go back to step 1
-
 ### Key Rules
 
 - Limit to **3 iterations** — if CI still fails after 3 fix attempts, stop and ask the user for guidance
 - Each fix commit should use semantic format: `fix: resolve CI failure in <area>`
 - Do not blindly retry without a code change — always diagnose before fixing
 - If a failure is flaky (passes on re-run without changes), note it to the user rather than making unnecessary code changes
-
-## Quick Reference
-
-| Action | Command |
-|--------|---------|
-| Create draft PR | `gh pr create --draft --title "..." --body "..."` |
-| Create PR with template | `gh pr create --draft --template` |
-| Set base branch | `gh pr create --draft --base develop` |
-| Add reviewers | `gh pr create --draft --reviewer user1,user2` |
-| Add labels | `gh pr create --draft --label bug,urgent` |
-| View open PRs | `gh pr list` |
-| View PR in browser | `gh pr view --web` |
-| Watch CI checks | `gh pr checks --watch` |
-| View failed run logs | `gh run view <run-id> --log-failed` |

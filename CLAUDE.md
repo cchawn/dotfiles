@@ -31,7 +31,6 @@ brew bundle
 # - Git with diff-so-fancy
 # - Terminal: ghostty
 # - Development utilities: jq, tree
-# - Fonts: FiraCode Nerd Font
 ```
 
 ### Version Management

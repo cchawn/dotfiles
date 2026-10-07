@@ -4,13 +4,11 @@
 
 - Before drafting recurring artifacts (weekly updates, status posts, reviews), check available skills/plugins/MCP servers first — only go freehand if none fit
 - Use `gh` CLI for GitHub (authenticated access)
-- Use `sentry-cli` skill for Sentry issues (`*.sentry.io/issues/*`)
 - Use `gh-pr` skill when creating pull requests on GitHub
 - Use `betting:write-update` plugin for weekly bet updates, not freehand drafts
-- Use MCP locker for Jira interactions (jira-cli has been removed)
+- Use MCP locker for Jira interactions
 - Use MCP locker or Glean to read Google Docs and Slack messages — try these before declining
 - Use Notion MCP for Notion documents (`*.notion.so/*`)
-- Detect JS/TS package manager: `pnpm-lock.yaml` → pnpm, `yarn.lock` → yarn, `package-lock.json` → npm, `deno.lock` → deno
 - Prefer simple git commands without `-C` flag when already in the working directory
 - Primary languages and ecosystems: TypeScript, Ruby, YAML (Helm/K8s)
 - Use `jq` for JSON processing in Bash, not Python
@@ -19,15 +17,15 @@
 ## Style
 
 - Canadian spelling in docs/commits, American in code
-- Avoid "robust", "thorough", "comprehensive"
+- Prefer plain, specific wording over intensifiers like "robust", "thorough", or "comprehensive"
 - Prefer evergreen language, never use "new", "improved", or "enhanced"
 - Never comment out code, delete it instead
 - When modifying documentation, preserve existing formatting choices (emojis, headers, styling)
 
 ## Workflow
 
-- Enter plan mode for ANY non-trivial task (3+ steps or architectural decisions)
-- Break work into phases: Phase 1: investigation → Phase 2: implementation → Phase 3: commit and PR. Summarize after each phase.
+- Enter plan mode before architectural decisions or work spanning multiple files or PRs; bug fixes with a clear cause skip it
+- On multi-step work, summarize what investigation found before starting implementation
 - When given a bug report: fix it autonomously — identify logs, errors, failing tests, then resolve
 - Verify before acting: search docs/code/configs before speculating about external APIs, network behaviour, or CI failure causes
 - For multi-PR work, produce a written stack plan (PR boundaries, scope, dependencies, rollback story) before writing code
@@ -35,7 +33,7 @@
 ## Scope Discipline
 
 - Fix only what was asked — do not start broader refactors, upgrades, or cleanup mid-task
-- When fixing deployed/production config (e.g., TLD migrations), do NOT also modify local dev config — confirm scope first
+- When fixing deployed/production config (e.g., TLD migrations), leave local dev config alone unless I confirm it is in scope
 - Offer commands for interactive prompts (passwords, auth flows) instead of running them yourself
 
 ## Code Changes
@@ -56,7 +54,7 @@
 - Never mock the functionality being tested
 - Never write tests that only test mocked behaviour
 - Test output must be clean (no ignored warnings/errors)
-- IMPORTANT: Never mark a task complete without proving it works — show explicit proof of completion (command output, test results)
+- Never mark a task complete without proving it works — show explicit proof of completion (command output, test results)
 
 ## Git
 
@@ -74,7 +72,7 @@ Check `git remote get-url origin`:
 - **Work**: URL does NOT contain "cchawn"
 - **Personal**: URL contains "cchawn"
 
-## IMPORTANT: Forbidden Actions
+## Forbidden Actions
 
 - Never use `--no-verify` to bypass hooks
 - Never commit directly to main/master
