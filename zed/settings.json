@@ -84,7 +84,7 @@
     "light": "Catppuccin Macchiato",
     "dark": "Catppuccin Macchiato",
   },
-  "format_on_save": "off",
+  "format_on_save": "on",
   "languages": {
     "Dockerfile": {
       "auto_indent": "preserve_indent",
