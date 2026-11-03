@@ -31,19 +31,6 @@
       "Bash(git stash:*)",
       "Bash(git status:*)",
       "Bash(grep:*)",
-      "Bash(gt bottom:*)",
-      "Bash(gt branch:*)",
-      "Bash(gt checkout:*)",
-      "Bash(gt create:*)",
-      "Bash(gt down:*)",
-      "Bash(gt log:*)",
-      "Bash(gt ls:*)",
-      "Bash(gt move:*)",
-      "Bash(gt restack:*)",
-      "Bash(gt status:*)",
-      "Bash(gt sync:*)",
-      "Bash(gt top:*)",
-      "Bash(gt up:*)",
       "Bash(just test:*)",
       "Bash(ls:*)",
       "Bash(npm:*)",
@@ -60,7 +47,6 @@
       "mcp__datadog__*",
       "mcp__glean_default__read_document",
       "mcp__glean_default__search",
-      "mcp__graphite__run_gt_cmd",
       "mcp__mcplocker__jira_get_ticket",
       "mcp__mcplocker__jira_search_tickets",
       "mcp__mcplocker__notion__notion-fetch",
@@ -105,7 +91,8 @@
     "crit@crit": true,
     "incident-command@ws-claude-marketplace": true,
     "ruby-lsp@claude-plugins-official": true,
-    "compass-utils@ws-claude-marketplace": true
+    "compass-utils@ws-claude-marketplace": true,
+    "cc-plugin-you-should-know@builtin": true
   },
   "extraKnownMarketplaces": {
     "caveman": {

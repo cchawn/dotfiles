@@ -6,7 +6,6 @@ deno = "latest"
 "npm:@devcontainers/cli" = "latest"
 "npm:@sentry/cli" = "latest"
 gh = "latest"
-"npm:@withgraphite/graphite-cli" = "1.8.2"
 
 [settings]
 idiomatic_version_file_enable_tools = ["node", "python", "ruby", "java"]
