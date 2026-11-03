@@ -1,104 +1,89 @@
 ---
 name: gh-pr
-description: Creates pull requests on GitHub via the gh CLI. Covers pre-flight checks, pushing commits, opening a draft PR with a structured body, and watching CI to fix failures. Use when opening or submitting a pull request.
+description: Opens or updates GitHub pull requests with the gh CLI. Covers pre-flight checks, pushing, a draft PR with a short body, stacked PRs with gh stack, and watching CI in the background to fix failures. Use when opening, submitting, or rewriting the description of a pull request.
 ---
 
 # GitHub Pull Request (`gh pr create`)
 
-Uses the `gh` CLI to open a draft pull request with a structured description.
-
 ## Pre-flight Checks
 
-Before creating the PR:
+- If `git branch --show-current` is `main` or `master`, stop and tell the user.
+- Push commits the remote branch lacks (`-u` if no upstream is set).
+- If the branch already has a PR (`gh pr view --json url`), update it with `gh pr edit --body-file` instead of opening another.
 
-- If `git branch --show-current` is `main` or `master`, abort and tell the user.
-- If the branch has commits its remote tracking branch lacks, push them (with `-u` if no upstream is set).
+## PR Body
 
-## PR Body Structure
+3–5 sentences across all sections. Reviewers read the diff, so the body gives context and intent only.
 
-The PR body must be short. Aim for 3–5 sentences total across all sections. Omit any section that would just repeat what the diff already shows. Human reviewers read diffs — the body explains context and intent, not mechanics.
+- Plain English that a reviewer outside the team can follow. No mannered prose, jargon, internal flag names, or `file:line` references.
+- No evidence tables, audits, or test matrices. Put detail in the chat reply instead.
+- Keep each paragraph on one line. GitHub renders a single newline as a line break.
+- If the repo has `.github/pull_request_template.md`, follow it instead of the sections below.
 
-Always use `##` (H2) headings. Include only sections with non-obvious content:
+Use `##` headings. Drop any section the title or diff already covers:
 
 ```markdown
 ## Why
 
-<One or two sentences — what problem this solves or what goal it achieves. Skip if obvious from the title.>
+<One or two sentences: the problem or goal.>
 
 ## What Changed
 
-<Short, bullet point list. Only include if the diff is non-obvious — e.g. a workaround, a subtle invariant, or a non-mechanical rename. Omit entirely if the diff speaks for itself.>
+<Short bullets, only for non-obvious changes: a workaround, a temporary guard, something left off on purpose.>
 
 ## How I Tested
 
-<Short bullet point list or one sentence — the key commands or checks that confirmed it works.>
+<One sentence or a short list of the checks that confirmed it works.>
 ```
 
-### Adding a Jira Ticket Link
-
-If the branch name contains a Jira ticket key (e.g., `PROJ-123`) or the user mentions one, add it to the **Why** section:
-
-```markdown
-## Why
-
-Jira: [PROJ-123](https://jira.atlassian.net/browse/PROJ-123)
-
-<rest of explanation>
-```
-
-Infer the Jira base URL from `git remote get-url origin` or prior context. If uncertain, ask the user.
+In work repos, if the branch name or conversation has a Jira key (e.g. `PLB-123`), make the first line of Why `Jira: [PLB-123](https://wealthsimple.atlassian.net/browse/PLB-123)`.
 
 ## Creating the PR
 
 ```bash
-# Gather context for the PR body
-git log main..HEAD --oneline          # commits on this branch
-git diff main..HEAD --stat            # files changed
+git log main..HEAD --oneline
+git diff main..HEAD --stat
 
-# Write the PR body to a temp file
 cat <<'EOF' > /tmp/pr-body.md
 ## Why
 
 <motivation>
-
-## What Changed
-
-<summary>
-
-## How I Tested
-
-<verification>
 EOF
 
-# Create draft PR using the body file
 gh pr create --draft \
-  --title "<concise title under 70 chars>" \
+  --title "<semantic title under 70 chars>" \
   --body-file /tmp/pr-body.md
 ```
 
-### Key Rules
+- Always open as draft.
+- Title uses semantic commit format (`feat:`, `fix:`, `chore:`, `refactor:`, `docs:`), e.g. `feat: add webhook retry logic`.
+- Base is `main` unless the repo's default branch differs.
+- Print the PR URL.
 
-- Always create as **draft** (`--draft`)
-- PR title: semantic commit format — `fix:`, `feat:`, `chore:`, `refactor:`, `docs:`, etc. Under 70 characters. Example: `feat: add webhook retry logic`
-- Base branch defaults to `main` — override with `--base <branch>` if the repo uses a different default
-- After creation, output the PR URL so the user can review it
-- If `gh pr create` fails due to auth, suggest `gh auth login`
+## Stacked PRs
 
-## Watch CI and Fix Failures
+Use `gh stack`, not `gh pr create --base <parent>`. Each PR body follows the rules above.
 
-After the PR is created, watch for CI failures and iterate until checks pass.
+- New stack: `gh stack init <bottom> ... <top>`, commit on each branch, then `gh stack submit --auto` (opens drafts and links them).
+- PRs already open: `gh stack init <branches>`, then `gh stack link <pr> <pr> ...`.
+- Updates: `gh stack rebase`, `gh stack sync`, `gh stack push`.
+- `gh stack add` only appends at the top. To insert lower or repair a stack, run `gh stack link <stack#> <prs...>`, `gh stack unstack --local`, then `gh stack checkout <stack#>`.
+- Confirm with `gh stack view`.
+
+## Watch CI in the Background
+
+Don't block the session on CI. Run the watch with the Bash tool's `run_in_background: true`, give the user the PR URL, and end the turn or keep working. The harness notifies you when the command exits, so don't poll it. For a stack, start one watch per PR.
 
 ```bash
-# Watch the CI run in real time (exits when complete)
-gh pr checks --watch
-
-# If any checks fail, inspect the logs
-gh run view <run-id> --log-failed
+# Wait for checks to register after the push, then watch until they finish
+until gh pr checks <number> --json name >/dev/null 2>&1; do sleep 15; done
+gh pr checks <number> --watch --fail-fast --interval 30
+gh pr checks <number> --json name,bucket --jq '.[] | "\(.bucket) \(.name)"'
 ```
 
-### Key Rules
+When notified, read the final check states from the output:
 
-- Limit to **3 iterations** — if CI still fails after 3 fix attempts, stop and ask the user for guidance
-- Each fix commit should use semantic format: `fix: resolve CI failure in <area>`
-- Do not blindly retry without a code change — always diagnose before fixing
-- If a failure is flaky (passes on re-run without changes), note it to the user rather than making unnecessary code changes
+- All `pass` or `skipping`: tell the user CI is green.
+- Any `fail`: run `gh run view <run-id> --log-failed`, find the cause, push the fix as a new commit (`fix: resolve CI failure in <area>`), and start a fresh background watch.
+- Stop after 3 fix rounds and ask the user.
+- Don't re-run without a code change. If a re-run passes with no change, tell the user the check is flaky.

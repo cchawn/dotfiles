@@ -1,81 +1,17 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+Personal macOS dotfiles. `install.sh` symlinks each config into place (`claude/` to `~/.claude`, `zsh/.zshrc` to `~/.zshrc`, and so on), so edits here take effect immediately.
 
-## Architecture Overview
+## Gotchas
 
-This is a **dotfiles repository** that manages personal development environment configuration for macOS. The repository follows a clean structure separating configuration files by tool/application.
+- `claude/` is the live `~/.claude`. Only `CLAUDE.md`, `settings.json`, `statusline.sh`, `skills/`, `commands/`, and `hooks/` are tracked; the rest is Claude Code runtime state. `hooks/herdr-*` is managed by herdr and ignored.
+- `private/` is gitignored and holds work settings and git identity. Don't copy anything from it into tracked files.
+- Add Homebrew dependencies to `Brewfile`.
 
-### Key Structure
+## Checks
 
-- `claude/` - Claude Code CLI configuration
-- `ghostty/` - Ghostty terminal configuration
-- `git/` - Git configuration files
-- `mise/` - Mise version manager configuration
-- `private/` - Private/sensitive configurations (e.g., work-specific settings)
-- `zed/` - Zed editor configuration
-- `zsh/` - Shell configuration and scripts
-- `starship/` - Starship prompt configuration
-- `Brewfile` - Homebrew dependencies for the entire setup
+No build or test suite. Validate edits with:
 
-## Common Development Commands
-
-### Initial Setup
-
-```bash
-# Install all dependencies
-brew bundle
-
-# This will install:
-# - Core shell tools: direnv, mise, starship, zsh
-# - Git with diff-so-fancy
-# - Terminal: ghostty
-# - Development utilities: jq, tree
-```
-
-### Version Management
-
-This setup uses **mise** (config at `mise/config.toml`) for managing tool versions:
-
-- Node.js (latest)
-- Python (latest)
-- Ruby (3.4)
-- Deno (latest)
-
-### Shell Environment
-
-- **Shell**: zsh with custom configuration
-- **Prompt**: Starship with custom Dracula theme (`starship/starship.toml`)
-- **Terminal**: Ghostty with custom theming (`ghostty/config`)
-- **Environment**: direnv for auto-loading project environments
-
-## Configuration Architecture
-
-### Tool Configuration Locations
-
-- **Starship prompt**: `starship/starship.toml` - Custom Dracula theme with emojis and git status
-- **Ghostty terminal**: `ghostty/config` - WildCherry theme with custom keybindings
-- **Mise version manager**: `mise/config.toml` - Latest versions of development tools
-- **Git**:
-  - Main config: `git/.gitconfig` - Shared git settings and aliases
-  - User config: `private/git/user.gitconfig` - Personal info (name, email, signing key)
-  - Template: `git/user.gitconfig.template` - Template for new setups
-- **Private configs**: `private/work.zsh` for work-specific settings
-
-### Custom Features
-
-- **Starship theme**: Custom Dracula palette with emoji-rich git status indicators
-- **Ghostty keybindings**:
-  - `cmd+d` / `cmd+shift+d` for pane splitting
-  - `cmd+plus/minus/0` for font size control
-- **Shell integration**: Full zsh integration with cursor, sudo, and title features
-
-## Development Notes
-
-This is a **configuration-only repository** - no building, testing, or compilation required. Changes take effect through:
-
-- Shell restart for zsh/starship changes
-- Terminal restart for ghostty changes
-- `mise install` for version changes
-
-The setup is designed for macOS with Homebrew and assumes FiraCode Nerd Font for proper icon display in the terminal prompt.
+- `jq . <file>.json` (not `zed/settings.json`, which has comments)
+- `zsh -n zsh/.zshrc`
+- `shellcheck <script>.sh`

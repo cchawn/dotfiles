@@ -2,68 +2,69 @@
 
 ## Tools & Environment
 
-- Before drafting recurring artifacts (weekly updates, status posts, reviews), check available skills/plugins/MCP servers first — only go freehand if none fit
-- Use `gh` CLI for GitHub (authenticated access)
-- Use `gh-pr` skill when creating pull requests on GitHub
-- Use `betting:write-update` plugin for weekly bet updates, not freehand drafts
-- Use MCP locker for Jira interactions
-- Use MCP locker or Glean to read Google Docs and Slack messages — try these before declining
-- Use Notion MCP for Notion documents (`*.notion.so/*`)
-- Prefer simple git commands without `-C` flag when already in the working directory
-- Primary languages and ecosystems: TypeScript, Ruby, YAML (Helm/K8s)
-- Use `jq` for JSON processing in Bash, not Python
-- Use `yamllint` for YAML validation in Bash, not Python
+- Before drafting recurring artifacts (weekly updates, status posts, reviews), check skills, plugins, and MCP servers; only go freehand if none fit
+- Use the `gh-pr` skill to open PRs or rewrite PR descriptions
+- Use `betting:write-update` for weekly bet updates
+- Jira: MCP locker. Google Docs and Slack: MCP locker or Glean, try both before saying you can't read it. Notion (`notion.so`, `app.notion.com`): Notion MCP
+- Stacked PRs: `gh stack`, not `gh pr create --base`
+- Work in local clones under `~/Workspace`, not through `gh api` or remote agents
+- Don't prefix commands with `cd <current dir> &&` or use `git -C` when already in the directory
+- `jq` for JSON and `yamllint` for YAML, not Python
+- Commands that prompt for passwords or need 1Password (`op`): give me the command to run with `!`, then verify the result yourself
 
 ## Style
 
-- Canadian spelling in docs/commits, American in code
-- Prefer plain, specific wording over intensifiers like "robust", "thorough", or "comprehensive"
-- Prefer evergreen language, never use "new", "improved", or "enhanced"
-- Never comment out code, delete it instead
-- When modifying documentation, preserve existing formatting choices (emojis, headers, styling)
+- Write plainly so a non-specialist can follow. No mannered prose, jargon, buzzwords, or intensifiers ("robust", "comprehensive", "load-bearing", "blast radius", "critical path")
+- Define a term or acronym the first time it appears
+- Keep artifacts short; put detailed evidence in the chat reply
+- Canadian spelling in docs and commits, American in code
+- Evergreen language: never "new", "improved", or "enhanced"
+- When editing docs, keep their existing formatting (emojis, headers, styling)
 
 ## Workflow
 
-- Enter plan mode before architectural decisions or work spanning multiple files or PRs; bug fixes with a clear cause skip it
-- On multi-step work, summarize what investigation found before starting implementation
-- When given a bug report: fix it autonomously — identify logs, errors, failing tests, then resolve
-- Verify before acting: search docs/code/configs before speculating about external APIs, network behaviour, or CI failure causes
-- For multi-PR work, produce a written stack plan (PR boundaries, scope, dependencies, rollback story) before writing code
+- If I ask a question or for a ticket update, do only that; don't start coding
+- Bug report: find the logs, errors, or failing tests and fix it
+- Plan mode before architectural decisions or work spanning multiple files or PRs; bug fixes with a clear cause skip it
+- Summarize what investigation found before implementing multi-step work
+- Multi-PR work: write a stack plan first (PR boundaries, scope, dependencies, rollback)
+- Check docs, code, and configs before guessing about external APIs, network behaviour, or CI failures
 
 ## Scope Discipline
 
-- Fix only what was asked — do not start broader refactors, upgrades, or cleanup mid-task
-- When fixing deployed/production config (e.g., TLD migrations), leave local dev config alone unless I confirm it is in scope
-- Offer commands for interactive prompts (passwords, auth flows) instead of running them yourself
+- Fix only what was asked, no drive-by refactors, upgrades, or cleanup
+- When fixing deployed config (e.g. TLD migrations), leave local dev config alone unless I confirm
+- Stop and confirm when there are several valid approaches, or before changing shared code or APIs or rewriting a file
 
 ## Code Changes
 
-- Code style priority: (1) Consistency with file, (2) Readability, (3) Performance, (4) Concise
-- Stop and confirm before: architectural changes, multiple valid approaches, shared code/API changes, full rewrites
-- Default to small, focused PRs — split large changes into stacked PRs for safe independent rollback
-- Keep database migrations in separate PRs — never bundle them with code changes
+- Priority: consistency with the file, readability, performance, concision
+- Don't add code comments unless asked; code should explain itself
+- Delete code, never comment it out
+- Small, focused PRs; split large changes into stacked PRs that can roll back independently
+- Database migrations get their own PR
 
 ## PR Reviews
 
-- Verify every concern against the actual code: read the file (not just the diff), grep for related usages, quote specific lines
-- Drop any concern you cannot verify — no speculation
-- Draft inline comments in the user's voice (concise, direct, no hedging); ask before posting Request Changes
+- Verify every concern against the full file, not just the diff: grep related usages and quote lines. Drop anything you can't verify
+- Draft inline comments in my voice (short, direct, no hedging)
+- Never post or reply to GitHub comments for me; ask before Request Changes
 
 ## Testing & Verification
 
-- Never mock the functionality being tested
-- Never write tests that only test mocked behaviour
-- Test output must be clean (no ignored warnings/errors)
-- Never mark a task complete without proving it works — show explicit proof of completion (command output, test results)
+- Never mock the thing under test, or write tests that only exercise mocks
+- No tests for trivial config (allowlist or ignore-list entries); run the existing suite instead
+- Test output must be clean, no ignored warnings or errors
+- Show proof (command output, test results) before calling a task done
 
 ## Git
 
-- Use semantic commits: `fix:`, `feat:`, `chore:` prefix, keep the message under 80 chars
-- Use `--force-with-lease`, never `--force`
-- Before amending or force-pushing, `git fetch` and check for upstream commits (bots, co-authors) — create a fresh commit instead if any landed
-- When rebasing stacks, verify upstream refs carefully to avoid dropping squash-merged commits
-- Never add AI as coauthor
-- 1Password/GPG signing may cause transient commit failures — retry once if signing fails
+- Semantic commits (`fix:`, `feat:`, `chore:`), under 80 characters
+- Never commit to main/master, use `--no-verify`, or commit secrets
+- Address review feedback in a new commit, never an amend. If I ask for an amend, check `git log -1` for bot commits first
+- Before force-pushing, `git fetch` and check for upstream commits; use `--force-with-lease`. Ask before rewriting pushed history
+- When rebasing stacks, check upstream refs so squash-merged commits aren't dropped
+- 1Password/GPG signing fails sometimes; retry once
 
 ### Work vs Personal Repositories
 
@@ -71,12 +72,3 @@ Check `git remote get-url origin`:
 
 - **Work**: URL does NOT contain "cchawn"
 - **Personal**: URL contains "cchawn"
-
-## Forbidden Actions
-
-- Never use `--no-verify` to bypass hooks
-- Never commit directly to main/master
-- Never rewrite pushed history without coordination
-- Never make changes unrelated to assigned task
-- Never commit secrets or credentials
-- Never reply to comments in GitHub on my behalf
