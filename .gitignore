@@ -22,6 +22,7 @@ mise.local.toml
 !**/claude/commands
 !**/claude/skills
 **/claude/skills/synced
+**/claude/skills/*/examples
 !**/claude/CLAUDE.md
 !**/claude/settings.json
 !**/claude/statusline.sh
