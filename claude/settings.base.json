@@ -94,7 +94,8 @@
     "incident-command@ws-claude-marketplace": false,
     "ruby-lsp@claude-plugins-official": false,
     "compass-utils@ws-claude-marketplace": true,
-    "cc-plugin-you-should-know@builtin": true
+    "cc-plugin-you-should-know@builtin": true,
+    "rust-analyzer-lsp@claude-plugins-official": true
   },
   "extraKnownMarketplaces": {
     "caveman": {
