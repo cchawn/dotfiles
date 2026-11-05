@@ -1,6 +1,6 @@
 # Posting a pending review
 
-Only after I approve posting, for this PR, in this conversation. Post only the comments I approved, as I last edited them.
+Only after I approve posting, for this PR, in this conversation. Post only the comments I approved, as I last edited them, keeping the `🤖` tag wherever I left it.
 
 1. Check for a pending review of mine. GitHub allows one per user per PR.
 

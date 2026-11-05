@@ -147,10 +147,10 @@ Drop it if the check clears it. Keep it only if you can point to the line and st
 
 ## Draft comments
 **`path:line`**
-> <body>
+> 🤖 <body>
 
 **Review body** (if worth writing)
-> <body>
+> 🤖 <body>
 
 ## How I verified this
 <What you read and ran, CI state, the automated reviewer's version and reviewers that ran, searches that failed or sources you couldn't reach, and a confidence level for each judgment.>
@@ -171,5 +171,6 @@ The verdict is a recommendation. Submitting the review, and with what state, is 
 
 - Write in my voice: short, direct, no hedging. Read `examples/<login>.md` beside this file, where `<login>` is `gh api user --jq .login`. If it's missing, read a few of my review comments on others' PRs and offer to write the file.
 - Each comment states the problem and its consequence, and links the evidence: a doc, an ADR, a related PR or a source line.
+- Start every comment, reply and review body with `🤖 ` so readers can tell it was drafted by Claude. If I rewrite one myself and drop the tag, don't add it back.
 - Tier emojis are for the chat report only, not the comments.
 - Write a bare `@name` only for a real login I'd want to notify.
