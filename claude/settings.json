@@ -1,4 +1,7 @@
 {
+  "env": {
+    "CLAUDE_CODE_SUBAGENT_MODEL": "sonnet"
+  },
   "includeCoAuthoredBy": false,
   "permissions": {
     "allow": [
@@ -85,12 +88,11 @@
     "command": "bash ~/.claude/statusline.sh"
   },
   "enabledPlugins": {
-    "betting@ws-claude-marketplace": true,
     "caveman@caveman": true,
-    "context7@claude-plugins-official": true,
+    "context7@claude-plugins-official": false,
     "crit@crit": true,
-    "incident-command@ws-claude-marketplace": true,
-    "ruby-lsp@claude-plugins-official": true,
+    "incident-command@ws-claude-marketplace": false,
+    "ruby-lsp@claude-plugins-official": false,
     "compass-utils@ws-claude-marketplace": true,
     "cc-plugin-you-should-know@builtin": true
   },
@@ -111,7 +113,8 @@
       "source": {
         "source": "git",
         "url": "https://github.com/wealthsimple/ws-claude-marketplace.git"
-      }
+      },
+      "autoUpdate": true
     }
   },
   "effortLevel": "low",

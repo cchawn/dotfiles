@@ -4,7 +4,6 @@
 
 - Before drafting recurring artifacts (weekly updates, status posts, reviews), check skills, plugins, and MCP servers; only go freehand if none fit
 - Use the `gh-pr` skill to open PRs or rewrite PR descriptions
-- Use `betting:write-update` for weekly bet updates
 - Jira: MCP locker. Google Docs and Slack: MCP locker or Glean, try both before saying you can't read it. Notion (`notion.so`, `app.notion.com`): Notion MCP
 - Stacked PRs: `gh stack`, not `gh pr create --base`
 - Work in local clones under `~/Workspace`, not through `gh api` or remote agents
