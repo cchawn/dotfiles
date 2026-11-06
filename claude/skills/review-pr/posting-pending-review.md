@@ -1,6 +1,6 @@
 # Posting a pending review
 
-Only after I approve posting, for this PR, in this conversation. Post only the comments I approved, as I last edited them, keeping the `🤖` tag wherever I left it.
+Step 10 runs this on every review. A pending review stays a draft that only I can see until I submit it. Post the draft comments and review body from `<scratchpad>/pr-<n>-review.md`, keeping the `🤖` tag on each.
 
 1. Check for a pending review of mine. GitHub allows one per user per PR.
 
@@ -11,8 +11,8 @@ Only after I approve posting, for this PR, in this conversation. Post only the c
 
 2. Write each comment body to its own scratchpad file, and build each request with `jq --rawfile` so backticks and quotes survive.
 3. Post:
-   - **No pending review:** `addPullRequestReview` with `pullRequestId`, no `event`, and `threads: [{path, line, side: "RIGHT", body}]`. Every `line` must sit inside one of the diff's hunks. Leave the review body empty unless I gave you one.
-   - **Pending review exists:** `addPullRequestReviewThread` with its `pullRequestReviewId`. Leave my existing comments alone.
+   - **No pending review:** `addPullRequestReview` with `pullRequestId`, no `event`, the drafted review body (empty if there isn't one), and `threads: [{path, line, side: "RIGHT", body}]`. Every `line` must sit inside one of the diff's hunks. A comment whose line isn't in a hunk goes in the review body instead, under its `path:line`.
+   - **Pending review exists:** `addPullRequestReviewThread` with its `pullRequestReviewId`. Leave my existing comments and its body alone, and put a drafted review body in the chat report for me to paste.
    - **Reply to an existing thread:** `addPullRequestReviewThreadReply` with the pending review's ID.
 4. Never submit the review, add reactions or resolve threads.
 5. Verify: re-read the pending review. Confirm each comment landed on the intended line and the review state is still `PENDING`. If a comment landed wrong, fix it and check again before reporting back.

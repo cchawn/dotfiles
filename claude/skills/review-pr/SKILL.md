@@ -1,6 +1,6 @@
 ---
 name: review-pr
-description: Reviews someone else's GitHub pull request in any repo. Runs a configured automated reviewer on the PR head in a subagent, searches GitHub, Jira and Slack for duplicate and related work, checks global and in-repo ADRs and docs, and checks that the ticket, PR description and code agree. Reports in chat with a walkthrough of the change, undocumented decisions, questions for the author and draft comments, and never posts to GitHub without explicit approval. Use when asked to review a PR, or given a PR URL or number to look at.
+description: Reviews someone else's GitHub pull request in any repo. Runs a configured automated reviewer on the PR head in a subagent, searches GitHub, Jira and Slack for duplicate and related work, checks global and in-repo ADRs and docs, and checks that the ticket, PR description and code agree. Reports in chat with a walkthrough of the change, undocumented decisions, questions for the author and draft comments, saves the draft comments as a pending review that only I can see, and opens the PR in the browser to submit. Never submits a review. Use when asked to review a PR, or given a PR URL or number to look at.
 ---
 
 # Reviewing a pull request
@@ -9,7 +9,7 @@ A repo's own rules (`AGENTS.md`, `CLAUDE.md`, `.github/review-context.md`, langu
 
 ## Ground rules
 
-- **Never write to GitHub without my explicit approval for this PR in this conversation.** No comments, pending reviews, reactions, approvals or resolved threads. Drafts stay in chat and a scratchpad file until I approve.
+- **The only GitHub write is the pending review in step 10.** A pending review is a draft that only I can see until I submit it. Never submit it, approve, request changes, comment outside it, react or resolve threads.
 - Never edit the author's branch or switch my checkout.
 - Don't ask the author anything you can find out yourself from the code, ticket, threads, CI or Slack.
 - Never guess intent. If product intent or deployed behaviour matters and the PR has no evidence (runs, links, screenshots), ask for it.
@@ -38,7 +38,7 @@ Review progress:
 - [ ] 7. Verify every candidate finding
 - [ ] 8. Check CI on the head SHA
 - [ ] 9. List undocumented decisions
-- [ ] 10. Report in chat and save the drafts
+- [ ] 10. Report in chat, save the drafts as a pending review, and open the PR
 - [ ] 11. Remove the worktree
 ```
 
@@ -109,7 +109,13 @@ Drop it if the check clears it. Keep it only if you can point to the line and st
 - a code comment, if it's an invariant or workaround the next editor must know;
 - the PR body, if it only explains why this PR took this route.
 
-**10. Report in chat and save the drafts.** Use the template below. Write the questions and draft comments to `<scratchpad>/pr-<n>-review.md`, then ask whether to post them as a pending review, and stop. If I approve, follow [posting-pending-review.md](posting-pending-review.md).
+**10. Report in chat, save the drafts as a pending review, and open the PR.** Use the template below. Write the questions and draft comments to `<scratchpad>/pr-<n>-review.md`. Then post the draft comments and review body as a pending review by following [posting-pending-review.md](posting-pending-review.md), and open the PR's Files tab in my default browser, where I edit, delete or submit them:
+
+```bash
+open "<PR url>/files"   # macOS; xdg-open on Linux
+```
+
+If there are no draft comments, post nothing and still open the page. End the report with the pending review's state: how many comments landed, and any that couldn't go on a diff line.
 
 **11. Remove the worktree** with `git worktree remove "<scratchpad>/pr-<n>"`. Save anything durable to memory, such as a design decision or a cleanup idea.
 
