@@ -1,11 +1,13 @@
 ---
 name: review-pr
-description: Reviews someone else's GitHub pull request in any repo. Runs a configured automated reviewer on the PR head in a subagent, searches GitHub, Jira and Slack for duplicate and related work, checks global and in-repo ADRs and docs, and checks that the ticket, PR description and code agree. Reports in chat with a walkthrough of the change, undocumented decisions, questions for the author and draft comments, saves the draft comments as a pending review that only I can see, and opens the PR in the browser to submit. Never submits a review. Use when asked to review a PR, or given a PR URL or number to look at.
+description: Reviews someone else's GitHub pull request in any repo. Runs a configured automated reviewer on the PR head in a subagent, searches GitHub, Jira and Slack for duplicate and related work, checks global and in-repo ADRs and docs, and checks that the ticket, PR description and code agree. Reports in chat with a walkthrough of the change, undocumented decisions, questions for the author and draft comments, saves the draft comments as a pending review that only I can see, and opens the PR in the browser to submit. Never submits a review. Use when asked to review a PR, or given a PR URL or number to look at. With `self` (`/review-pr self`), reviews your own unpushed branch before its PR exists and fixes what it finds, with no GitHub writes.
 ---
 
 # Reviewing a pull request
 
 A repo's own rules (`AGENTS.md`, `CLAUDE.md`, `.github/review-context.md`, language guides) apply on top of this skill and win where they conflict.
+
+Called with `self`, or asked to review your own changes before opening a PR, follow [self-review.md](self-review.md) instead of the workflow below.
 
 ## Ground rules
 
