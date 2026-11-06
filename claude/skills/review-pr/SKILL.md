@@ -103,7 +103,15 @@ Note each ADR or doc the PR follows, contradicts or should cite, and each doc th
 
 Drop it if the check clears it. Keep it only if you can point to the line and state the consequence. If you can't settle it, keep it as 🟠 and say what's unconfirmed. Drop anything another reviewer already raised unless you add something concrete. Keep about 10 findings at most and fold the rest into one line.
 
-**8. Check CI on the head SHA**, including whether the latest commit ran at all. A commit with no runs is fine only if a later or stacked head that contains it passed.
+**8. Check CI on the head SHA**, including whether the latest commit ran at all. A commit with no runs is fine only if a later or stacked head that contains it passed. My token is a fine-grained one with no Checks permission, so `gh pr checks` and the check-runs API return 403. Read the Actions runs and commit statuses instead:
+
+```bash
+gh run list --commit <headRefOid> --json databaseId,name,status,conclusion
+gh run view <databaseId> --json jobs --jq '.jobs[] | {name, conclusion}'   # for a failed or unclear run
+gh api repos/<owner>/<repo>/commits/<headRefOid>/status --jq '.statuses[] | {context, state}'
+```
+
+These miss only check runs posted by other GitHub Apps. Say so in the report when that matters, and don't count a 403 as a CI failure.
 
 **9. List undocumented decisions.** A decision is a choice a reasonable engineer could have made differently: a new dependency, data store, protocol or pattern; a departure from the repo's conventions or an ADR; a changed public API, schema or contract; a workaround, pinned version, suppression or TODO. If the reason isn't in an ADR, code comment, the PR body or the ticket, report it and say where it belongs:
 
